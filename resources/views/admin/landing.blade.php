@@ -85,8 +85,8 @@
 <div class="container">
 
     <div class="row">
-        <a class="links links1" href="">Create Event</a>
-        <a class="links links2" href="">All events</a>
+        <a class="links links1" href="{{route('admin.event.create')}}">Create Event</a>
+        <a class="links links2" href="{{route('admin.event.index')}}">All events</a>
     </div>
 </div>
 </div>

@@ -33,12 +33,15 @@ ADMIN DASHBOARD
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
+
+
     <section id="main-content">
         <section class="wrapper">
             <div class="row">
                 <div class="col-lg-9 main-chart">
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
+                        <h1>{{$event->name}}</h1>
                         <h3>USER VISITS</h3>
                     </div>
                     <div class="custom-bar-chart">

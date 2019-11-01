@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminEvent extends Controller
+class HomeAdmin extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +14,13 @@ class AdminEvent extends Controller
      */
 
 
-    public function landing(){
+    public function homeWithId($event_id){
 
-        $events = Event::all();
-
-        $user = Auth::user();
+        $event = Event::findOrfail($event_id);
 
 
-        return view('admin.landing',compact('events','user'));
+
+        return view('admin.index',compact('event'));
     }
 
     public function index()
@@ -38,10 +36,6 @@ class AdminEvent extends Controller
     public function create()
     {
         //
-
-
-        return view('admin.event.create');
-
     }
 
     /**
@@ -53,20 +47,6 @@ class AdminEvent extends Controller
     public function store(Request $request)
     {
         //
-
-        $event = new Event();
-
-        $event->name = $request->name;
-        $event->date =$request-> date;
-        $event->organizer = $request->organizer;
-        $event->location = $request->location;
-        $event->is_active = 1;
-        $event->save();
-
-
-        return redirect('admin/active/'.$event->id);
-
-
     }
 
     /**

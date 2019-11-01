@@ -34,4 +34,14 @@ Route::resource('admin/judge','JudgeController',['names'=>[
         'edit'=>'admin.judge.edit',
     ]]);
 
+Route::resource('admin/event','AdminEvent',['names'=>[
+    'index'=>'admin.event.index',
+    'create'=>'admin.event.create',
+    'store'=>'admin.event.store',
+    'edit'=>'admin.event.edit',
+]]);
+
+
+
 Route::get('admin/landing','AdminEvent@landing')->name('admin.landing');
+Route::get('/admin/active/{event_id}','HomeAdmin@homeWithId')->name('admin.index');
