@@ -71,12 +71,12 @@ ADMIN DASHBOARD
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-desktop"></i>
-                        <span>Candidates</span>
+                        <span>Contestants</span>
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="general.html">Add Candidate</a></li>
-                        <li><a href="buttons.html">All Candidates</a></li>
+                        <li><a href="{{route('admin.contestant.create',['event_id'=>$event->id])}}">Add Contestant</a></li>
+                        <li><a href="buttons.html">All Contestant</a></li>
                     </ul>
                 </li>
 
