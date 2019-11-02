@@ -26,7 +26,88 @@ ADMIN DASHBOARD
 
 
 @section('body')
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+                <h5 class="centered">Sam Soffes</h5>
+                <li class="mt">
+                    <a class="active" href="{{url('admin/active/'.$event->id)}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Event</span>
+                        <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="general.html">Add Event</a></li>
+                        <li><a href="buttons.html">All Events</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Judges</span>
+                        <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{route('admin.judge.create',['event_id'=>$event->id])}}">Add Judge</a></li>
+                        <li><a href="{{route('admin.judge.index')}}">All Judges</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Candidates</span>
+                        <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="general.html">Add Candidate</a></li>
+                        <li><a href="buttons.html">All Candidates</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Criteria</span>
+                        <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="general.html">Add Criteria</a></li>
+                        <li><a href="buttons.html">All Criteria</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Users</span>
+                        <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="general.html">Add User</a></li>
+                        <li><a href="buttons.html">All Users</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
 
     <!--sidebar end-->
     <!-- **********************************************************************************************************************************************************
@@ -42,7 +123,7 @@ ADMIN DASHBOARD
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1>{{$event->name}}</h1>
-                        <h3>USER VISITS</h3>
+                        <h3>Contestant Score</h3>
                     </div>
                     <div class="custom-bar-chart">
                         <ul class="y-axis">
@@ -54,31 +135,31 @@ ADMIN DASHBOARD
                             <li><span>0</span></li>
                         </ul>
                         <div class="bar">
-                            <div class="title">JAN</div>
-                            <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+                            <div class="title">Contestant 1</div>
+                            <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">93%</div>
                         </div>
                         <div class="bar ">
-                            <div class="title">FEB</div>
-                            <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
+                            <div class="title">Contestant 2</div>
+                            <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">85%</div>
                         </div>
                         <div class="bar ">
-                            <div class="title">MAR</div>
+                            <div class="title">Contestant 3</div>
                             <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
                         </div>
                         <div class="bar ">
-                            <div class="title">APR</div>
+                            <div class="title">Contestant 4</div>
                             <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
                         </div>
                         <div class="bar">
-                            <div class="title">MAY</div>
+                            <div class="title">Contestant 5</div>
                             <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
                         </div>
                         <div class="bar ">
-                            <div class="title">JUN</div>
+                            <div class="title">Contestant 6</div>
                             <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
                         </div>
                         <div class="bar">
-                            <div class="title">JUL</div>
+                            <div class="title">Contestant 7</div>
                             <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
                         </div>
                     </div>

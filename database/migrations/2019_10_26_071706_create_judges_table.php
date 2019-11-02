@@ -22,11 +22,9 @@ class CreateJudgesTable extends Migration
             $table->integer('age');
             $table->string('contactNumber')->unique();
             $table->string('email')->unique();
-            $table->integer('photo_id');
+            $table->integer('photo_id')->nullable();
             $table->integer('sex_id');
             $table->integer('event_id');
-            $table->string('username');
-            $table->string('password');
             $table->timestamps();
         });
     }
