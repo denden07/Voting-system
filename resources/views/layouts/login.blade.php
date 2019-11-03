@@ -87,7 +87,9 @@
 
             <div class="text-center p-t-90">
                 <a class="txt1" href="#">
-                    Forgot Password?
+                    @if(session()->has('error'))
+                        <h1 class="alert alert-info">{{ session()->get('error') }}</h1>
+                    @endif
                 </a>
             </div>
             </form>

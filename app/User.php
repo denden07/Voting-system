@@ -26,4 +26,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function judge(){
+        return $this->belongsTo('App\Judge','judge_id');
+    }
+
+public function isAdmin(){
+    if($this->is_admin == 1){
+        return true;
+    }
+    return false;
+}
+
+    public function isJudge(){
+        if($this->is_judge == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

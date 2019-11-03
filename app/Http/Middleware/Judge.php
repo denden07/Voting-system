@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class Judge
 {
     /**
      * Handle an incoming request.
@@ -18,21 +18,15 @@ class Admin
     {
 
 
-
         if (Auth::check()){
 
-            if(Auth::user()->isAdmin()){
-                return $next($request);
+            if(Auth::user()->isJudge()){
 
+                return $next($request);
             }
             return redirect('judge');
         }
-
-//        return redirect('/logout') ->with(['error' => "You do not have the permission to enter this site. Please login with correct user."]);
-
 //
-
+        return redirect('/logout') ->with(['error' => "You do not have the permission to enter this site. Please login with correct user."]);
     }
-
-
 }

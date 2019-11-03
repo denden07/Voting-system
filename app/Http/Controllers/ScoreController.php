@@ -2,31 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminEvent extends Controller
+class ScoreController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function landing(){
-
-        $events = Event::all();
-
-        $user = Auth::user();
-
-
-
-
-        return view('admin.landing',compact('events','user'));
-    }
-
     public function index()
     {
         //
@@ -40,10 +24,6 @@ class AdminEvent extends Controller
     public function create()
     {
         //
-
-
-        return view('admin.event.create');
-
     }
 
     /**
@@ -55,20 +35,6 @@ class AdminEvent extends Controller
     public function store(Request $request)
     {
         //
-
-        $event = new Event();
-
-        $event->name = $request->name;
-        $event->date =$request-> date;
-        $event->organizer = $request->organizer;
-        $event->location = $request->location;
-        $event->is_active = 1;
-        $event->save();
-
-
-        return redirect('admin/active/'.$event->id);
-
-
     }
 
     /**
