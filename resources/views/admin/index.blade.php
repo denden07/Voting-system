@@ -87,7 +87,7 @@ ADMIN DASHBOARD
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="general.html">Add Criteria</a></li>
+                        <li><a href="{{route('admin.criteria.create',['event_id'=>$event->id])}}">Add Criteria</a></li>
                         <li><a href="buttons.html">All Criteria</a></li>
                     </ul>
                 </li>
@@ -385,35 +385,57 @@ ADMIN DASHBOARD
                     *********************************************************************************************************************************************************** -->
                 <div class="col-lg-3 ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
-                    <div class="donut-main">
-                        <h4>COMPLETED ACTIONS & PROGRESS</h4>
-                        <canvas id="newchart" height="130" width="130"></canvas>
-                        <script>
-                            var doughnutData = [{
-                                value: 70,
-                                color: "#4ECDC4"
-                            },
-                                {
-                                    value: 30,
-                                    color: "#fdfdfd"
-                                }
-                            ];
-                            var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
-                        </script>
+                    <div class="donut-main" style="margin-bottom: 200px;">
+                        <h3>Criteria of the contest</h3>
+                        {{--<canvas id="newchart" height="130" width="130"></canvas>--}}
+                        {{--<script>--}}
+                            {{--var doughnutData = [{--}}
+                                {{--value: 70,--}}
+                                {{--color: "#4ECDC4"--}}
+                            {{--},--}}
+                                {{--{--}}
+                                    {{--value: 30,--}}
+                                    {{--color: "#fdfdfd"--}}
+                                {{--}--}}
+                            {{--];--}}
+                            {{--var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);--}}
+                        {{--</script>--}}
+                        <h4 style="margin-top: 50px">Preliminary</h4>
+                        @if($criterias)
+                        @foreach($criterias as $criteria)
+
+
+                            <p>{{$criteria->name ." "."="." ". $criteria->percentage."%"}}</p>
+
+
+                            @endforeach
+                            @endif
+
+                        <h4 style="margin-top: 50px">Finals</h4>
+                        @if($criterias2)
+                            @foreach($criterias2 as $criteria)
+
+
+                                <p>{{$criteria->name." "."="." ". $criteria->percentage."%"}}</p>
+
+                            @endforeach
+                        @endif
+
+
                     </div>
                     <!--NEW EARNING STATS -->
-                    <div class="panel terques-chart">
-                        <div class="panel-body">
-                            <div class="chart">
-                                <div class="centered">
-                                    <span>TODAY EARNINGS</span>
-                                    <strong>$ 890,00 | 15%</strong>
-                                </div>
-                                <br>
-                                <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="panel terques-chart">--}}
+                        {{--<div class="panel-body">--}}
+                            {{--<div class="chart">--}}
+                                {{--<div class="centered">--}}
+                                    {{--<span>TODAY EARNINGS</span>--}}
+                                    {{--<strong>$ 890,00 | 15%</strong>--}}
+                                {{--</div>--}}
+                                {{--<br>--}}
+                                {{--<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <!--new earning end-->
                     <!-- RECENT ACTIVITIES SECTION -->
                     <h4 class="centered mt">RECENT ACTIVITY</h4>

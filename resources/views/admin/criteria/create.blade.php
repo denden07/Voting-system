@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Add Contestant
+    Add Criteria
 @endsection
 
 
@@ -110,7 +110,7 @@
 
     <section id="main-content">
         <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add Contestant for "{{$event->name}}"</h3>
+            <h3><i class="fa fa-angle-right"></i> Add Criteria for "{{$event->name}}"</h3>
             <!-- BASIC FORM VALIDATION -->
 
             <!-- FORM VALIDATION -->
@@ -122,69 +122,39 @@
                     <div class="form-panel">
                         <div class="form">
 
-                            {!! Form::open(['method'=>'POST','route'=>['admin.contestant.save',$event->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
+                            {!! Form::open(['method'=>'POST','route'=>['admin.criteria.save',$event->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
                             {{--<form action="{{route('admin.judge.save', ['event_id'=>$event->id])}}" method="post">--}}
                             <div class="form-group ">
-                                <label for="firstname" class="control-label col-lg-2">Firstname</label>
+                                <label for="name" class="control-label col-lg-2">Criteria Name</label>
                                 <div class="col-lg-10">
-                                    <input class=" form-control" id="firstname" name="firstname" type="text" />
+                                    <input class=" form-control" id="name" name="name" type="text" />
                                 </div>
                             </div>
 
                             <div class="form-group ">
-                                <label for="middlename" class="control-label col-lg-2">Middlename</label>
+                                <label for="percentage" class="control-label col-lg-2">Percentage</label>
                                 <div class="col-lg-10">
-                                    <input class=" form-control" id="middlename" name="middlename" type="text" />
+                                    <input class=" form-control" id="percentage" name="percentage" type="text" />
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label for="lastname" class="control-label col-lg-2">Lastname</label>
+                                <label for="category" class="control-label col-lg-2">Category</label>
                                 <div class="col-lg-10">
-                                    <input class=" form-control" id="lastname" name="lastname" type="text" />
+                                    {!!  Form::select('category',[''=>'Choose']+$categories,null,['class'=>'form-control','id'=>'gender'])!!}
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label for="address" class="control-label col-lg-2">Adress</label>
+                                <label for="round_id" class="control-label col-lg-2">Round</label>
                                 <div class="col-lg-10">
-                                    <input class="form-control " id="address" name="address" type="text" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="age" class="control-label col-lg-2">Age</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control " id="age" name="age" type="text" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="contactNumber" class="control-label col-lg-2">Contact Number</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control " id="contactNumber" name="contactNumber" type="text" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="number" class="control-label col-lg-2">Contestant Number</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control " id="number" name="number" type="text" />
+                                    {!!  Form::select('round_id',[''=>'Choose']+$round,null,['class'=>'form-control','id'=>'gender'])!!}
                                 </div>
                             </div>
 
-                            <div class="form-group ">
-                                <label for="gender" class="control-label col-lg-2">Gender</label>
-                                <div class="col-lg-10">
-                                    {{--<input class="form-control " id="gender" name="gender" type="text" />--}}
-                                    {!!  Form::select('sex_id',[''=>'Choose']+$genders,null,['class'=>'form-control','id'=>'gender'])!!}
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="photo_id" class="control-label col-lg-2">Photo</label>
-                                <div class="col-lg-10">
-                                    {!! Form::file('photo_id',null,['class'=>'form-control alert-up-pd']) !!}
-                                </div>
-                            </div>
+
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    {!! Form::submit('Register Contestant',['class'=>'btn btn-theme']) !!}
+                                    {!! Form::submit('Register Criteria',['class'=>'btn btn-theme']) !!}
                                 </div>
                             </div>
                             </form>
@@ -228,7 +198,7 @@
                     // (string | mandatory) the heading of the notification
                     title: 'Success!',
                     // (string | mandatory) the text inside the notification
-                    text: 'Contestant is Added',
+                    text: 'Criteria is Added',
                     // (string | optional) the image to display on the left
                     image: 'ui/img/ui-sam.jpg',
                     // (bool | optional) if you want it to fade out on its own or just sit there

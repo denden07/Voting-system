@@ -2,30 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Criteria;
 use App\Event;
+use App\Round;
 use Illuminate\Http\Request;
 
-class HomeAdmin extends Controller
+class CriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function homeWithId($event_id){
-
-        $event = Event::findOrfail($event_id);
-        $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
-        $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
-
-
-
-        return view('admin.index',compact('event','criterias','criterias2'));
-    }
-
     public function index()
     {
         //
@@ -36,9 +25,15 @@ class HomeAdmin extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($event_id)
     {
         //
+        $event = Event::findOrFail($event_id);
+        $categories = Category::pluck('name','id')->all();
+        $round = Round::pluck('name','id')->all();
+
+        return view('admin.criteria.create',compact('event','categories','round'));
+
     }
 
     /**
@@ -47,6 +42,21 @@ class HomeAdmin extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function inputCriteria(Request $request,$event_id)
+    {
+        $criteria = new Criteria();
+
+        $criteria->name = $request->name;
+        $criteria->percentage = $request->percentage;
+        $criteria->category = $request->category;
+        $criteria->round_id = $request->round_id;
+        $criteria->event_id = $event_id;
+        $criteria->save();
+
+        return back()->with('success','Contestant is registered');
+    }
+
     public function store(Request $request)
     {
         //

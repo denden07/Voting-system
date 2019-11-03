@@ -86,7 +86,7 @@
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="general.html">Add Criteria</a></li>
+                        <li><a href="{{route('admin.criteria.create',['event_id'=>$event->id])}}">Add Criteria</a></li>
                         <li><a href="buttons.html">All Criteria</a></li>
                     </ul>
                 </li>

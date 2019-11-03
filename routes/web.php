@@ -44,8 +44,12 @@ Route::resource('admin/event','AdminEvent',['names'=>[
 
 Route::get('admin/landing','AdminEvent@landing')->name('admin.landing');
 Route::get('/admin/active/{event_id}','HomeAdmin@homeWithId')->name('admin.index');
+
 Route::get('admin/judge/create/{event_id}','JudgeController@create')->name('admin.judge.create');
 Route::post('admin/judge/save/{event_id}','JudgeController@inputJudge')->name('admin.judge.save');
 
 Route::get('admin/contestant/create/{event_id}','ContestantController@create')->name('admin.contestant.create');
 Route::post('admin/contestant/save/{event_id}','ContestantController@inputContestant')->name('admin.contestant.save');
+
+Route::get('admin/criteria/create/{event_id}','CriteriaController@create')->name('admin.criteria.create');
+Route::post('admin/criteria/save/{event_id}','CriteriaController@inputCriteria')->name('admin.criteria.save');
