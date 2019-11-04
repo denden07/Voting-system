@@ -96,10 +96,9 @@
                             <tr>
                             <td>{{$contestant->number}}</td>
                             <td>{{$contestant->firstname ." ". $contestant->lastname}}</td>
-                                <input style="display: none" name="contestant_id[]" value="{{$contestant->id}}" type="text">
-
-
-
+                                @foreach($contestants as $ccc)
+                                <input style="display: none" name="contestant_id[]" value="{{$ccc->id}}" type="text">
+                                @endforeach
                                 @foreach($criterias as $criteria)
                             <td><input style="width: 50px" name="score[]" type="text"></td>
                                     <input style="display: none" name="criteria_id[]" value="{{$criteria->id}}" type="text">

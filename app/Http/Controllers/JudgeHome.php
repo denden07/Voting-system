@@ -109,10 +109,11 @@ class JudgeHome extends Controller
 //        }
 //
         $input = $request->all();
+        $count = count($request->input('score'));
 
-        for($i=0; $i<= count($input['score']); $i++) {
+        for($i=0; $i<= $count; $i++) {
 
-//            if(empty($input['score'][$i]) || !is_numeric($input['score'][$i])) continue;
+            if(empty($input['score'][$i]) || !is_numeric($input['score'][$i])) continue;
 
             $data = [
                 'contestant_id' => $input['contestant_id'][$i],
@@ -121,8 +122,8 @@ class JudgeHome extends Controller
                 'criteria_id'=> $input['criteria_id'][$i],
             ];
 
-
             Score::create($data);
+
         }
 
 
