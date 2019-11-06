@@ -21,7 +21,7 @@ Auth::routes();
 
 
 
-
+//Admin
 
 Route::group(['middleware'=>'admin'],function (){
 
@@ -57,20 +57,31 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('admin/criteria/create/{event_id}','CriteriaController@create')->name('admin.criteria.create');
     Route::post('admin/criteria/save/{event_id}','CriteriaController@inputCriteria')->name('admin.criteria.save');
 
+    Route::get('admin/score/view/{event_id}','ScoreController@viewContestant')->name('admin.contestant.view');
+    Route::get('admin/score/show/{event_id}/{contestant_id}','ScoreController@viewScore')->name('admin.contestant.score.view');
+
 
 
 });
 
+
+
+//Judge
+
+
 Route::group(['middleware'=>'judge'],function () {
 
     Route::get('judge','JudgeHome@index')->name('judge.landing');
+
+    Route::get('judge/criteria/{criteria_id}','JudgeHome@indexWithCriteria')->name('judge.select.criteria');
 
 
     Route::get('judge/try',function (){
         return view('judge.try');
     });
 
-    Route::post('judge/score/submit/{event_id}/','JudgeHome@inputScore')->name('judge.score.save');
+    Route::post('judge/score/submit/{event_id}/{criteria_selector}','JudgeHome@inputScore')->name('judge.score.save');
+    Route::get('judge/score/compute/{event_id}','JudgeHome@computeScore')->name('judge.score.compute');
 });
 
 

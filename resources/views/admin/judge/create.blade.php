@@ -29,6 +29,8 @@
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
+
+
     <aside>
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
@@ -94,12 +96,12 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-desktop"></i>
-                        <span>Users</span>
+                        <span>Scores</span>
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="general.html">Add User</a></li>
-                        <li><a href="buttons.html">All Users</a></li>
+                        <li><a href="{{route('admin.score.view',['event_id'=>$event->id])}}">Prelims</a></li>
+                        <li><a href="buttons.html">Finals</a></li>
                     </ul>
                 </li>
 
@@ -107,6 +109,7 @@
             <!-- sidebar menu end-->
         </div>
     </aside>
+
 
     <section id="main-content">
         <section class="wrapper">

@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Contestant;
+use App\Criteria;
+use App\Event;
+
+use App\Judge;
+use App\Score;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -81,4 +87,52 @@ class ScoreController extends Controller
     {
         //
     }
+
+
+    /**
+ For admin
+     */
+
+
+    public function viewContestant($event_id)
+    {
+
+         $event = Event::findOrFail($event_id);
+
+
+        $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
+        $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
+
+        $contestants = Contestant::where('event_id',$event_id)->get();
+        $scoresD = array();
+        foreach($contestants as $contestant) {
+            $scoresD[] = Score::where('event_id', $event_id)
+                ->where('contestant_id', $contestant->id)
+                ->get();
+        }
+
+
+
+
+
+
+        $judges = Judge::where('event_id',$event_id);
+
+
+
+            $scores = Score::where('event_id',$event_id)->get();
+
+
+
+
+        return view('admin.score.index',compact('event','criterias','criterias2','contestants','scores',['scoresD'=>$scoresD]));
+    }
+
+    public function viewScore($event_id,$contestant_id)
+    {
+
+
+
+    }
+
 }

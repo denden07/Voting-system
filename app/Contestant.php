@@ -12,4 +12,5 @@ class Contestant extends Model
         'firstname','middlename','lastname','age','sex_id','number','contactNumber','address','photo_id','event_id'
     ];
 
+
 }
