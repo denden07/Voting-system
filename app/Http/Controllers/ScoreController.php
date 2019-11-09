@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Computed;
 use App\Contestant;
 use App\Criteria;
 use App\Event;
 
 use App\Judge;
 use App\Score;
+use App\User;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -93,44 +95,46 @@ class ScoreController extends Controller
  For admin
      */
 
+    public function showJudge($event_id){
 
-    public function viewContestant($event_id)
+        $event = Event::findOrFail($event_id);
+        $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
+        $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
+        $judges = Judge::where('event_id',$event_id)->get();
+
+        return view('admin.score.show-juge',compact('event','criterias2','criterias','judges'));
+    }
+
+    public function viewContestantScore($event_id,$judge_id)
     {
 
          $event = Event::findOrFail($event_id);
 
 
+         $judge = User::where('judge_id',$judge_id)->first();
+
         $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
         $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
 
         $contestants = Contestant::where('event_id',$event_id)->get();
-        $scoresD = array();
-        foreach($contestants as $contestant) {
-            $scoresD[] = Score::where('event_id', $event_id)
-                ->where('contestant_id', $contestant->id)
-                ->get();
-        }
 
+        $scores =Score::where('event_id',$event_id)->where('judge_id',$judge->id)->orderBy('contestant_id','ASC')->orderBy('criteria_id','asc')->get();
 
-
-
-
-
-        $judges = Judge::where('event_id',$event_id);
-
-
-
-            $scores = Score::where('event_id',$event_id)->get();
-
-
-
-
-        return view('admin.score.index',compact('event','criterias','criterias2','contestants','scores',['scoresD'=>$scoresD]));
+        $final_scores = Computed::where('event_id',$event_id)->where('judge_id',$judge)->orderBy('contestant_id','ASC')->get();
+        return view('admin.score.index',compact('event','criterias','criterias2','contestants','scores','final_scores'));
     }
 
-    public function viewScore($event_id,$contestant_id)
+    public function computeFinalScore($event_id)
     {
 
+        $contestants = Contestant::where('event_id',$event_id)->get();
+
+
+        foreach ($contestants as $contestant)
+        {
+          $compute =  Computed::where('contestant_id',$contestant->id)->where('round_id',1)->sum('score');
+          print_r($compute/2);
+        }
 
 
     }

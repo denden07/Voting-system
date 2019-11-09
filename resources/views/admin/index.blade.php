@@ -99,7 +99,7 @@ ADMIN DASHBOARD
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{route('admin.score.view',['event_id'=>$event->id])}}">Prelims</a></li>
+                        <li><a href="{{route('admin.show.judge.score',['event_id'=>$event->id])}}">Prelims</a></li>
                         <li><a href="buttons.html">Finals</a></li>
                     </ul>
                 </li>

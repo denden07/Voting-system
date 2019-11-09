@@ -57,8 +57,11 @@ Route::group(['middleware'=>'admin'],function (){
     Route::get('admin/criteria/create/{event_id}','CriteriaController@create')->name('admin.criteria.create');
     Route::post('admin/criteria/save/{event_id}','CriteriaController@inputCriteria')->name('admin.criteria.save');
 
-    Route::get('admin/score/view/{event_id}','ScoreController@viewContestant')->name('admin.contestant.view');
-    Route::get('admin/score/show/{event_id}/{contestant_id}','ScoreController@viewScore')->name('admin.contestant.score.view');
+    Route::get('admin/score/view/{event_id}/{judge_id}','ScoreController@viewContestantScore')->name('admin.contestant.view');
+
+    Route::get('admin/choose/judge/{event_id}','ScoreController@showJudge')->name('admin.show.judge.score');
+
+    Route::get('admin/tally/score/{event_id}','ScoreController@computeFinalScore')->name('admin.tally.total.score');
 
 
 
@@ -74,6 +77,7 @@ Route::group(['middleware'=>'judge'],function () {
     Route::get('judge','JudgeHome@index')->name('judge.landing');
 
     Route::get('judge/criteria/{criteria_id}','JudgeHome@indexWithCriteria')->name('judge.select.criteria');
+
 
 
     Route::get('judge/try',function (){

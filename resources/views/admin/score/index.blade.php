@@ -21,6 +21,81 @@
     <link href="{{asset('ui/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('ui/css/style-responsive.css')}}" rel="stylesheet">
     <script src="{{asset('ui/lib/chart-master/Chart.js')}}"></script>
+    <style>
+
+        .table-style{
+            padding: 8px;
+            margin: 35px;
+        }
+
+
+
+
+        .box-header{
+            flex-direction: row;
+            display: flex;
+        }
+        .box-header-items{
+
+            margin-right: 25px;
+
+            margin-left: -1px;
+        }
+
+        .box-contents{
+            display: flex;
+        }
+
+        .contestants-number{
+            margin-right: 50px;
+            margin-left: 50px;
+
+        }
+
+        .contestants-name{
+
+
+            display: flex;
+            flex-direction: column;
+        }
+        .contestants-name-items{
+            height: 50px;
+            width: 90px;
+            font-size: 15px;
+
+        }
+        .contestants-number-items{
+            height: 50px;
+
+        }
+        .box-header-criteria{
+            width: 500px;
+        }
+        .box-header-items-criteria{
+            margin-right: 9px;
+            font-weight: bold;
+
+
+        }
+
+        .box{
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: 70px;
+            width: 400px;
+
+        }
+        .score-flex{
+            margin-right: 50px;
+
+        }
+        .final-score{
+            height: 40px;
+        }
+
+
+    </style>
+
 @endsection
 
 @section('body')
@@ -93,7 +168,7 @@
                     <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{route('admin.contestant.view',['event_id'=>$event->id])}}">Prelims</a></li>
+                    <li><a href="{{route('admin.show.judge.score',['event_id'=>$event->id])}}">Prelims</a></li>
                     <li><a href="buttons.html">Finals</a></li>
                 </ul>
             </li>
@@ -111,22 +186,76 @@
                 <!--CUSTOM CHART START -->
                 <div class="border-head">
                     <h1>{{$event->name}}</h1>
-                    <h3>Contestant Score</h3>
+                    <h3>Scored by</h3>
                 </div>
 
 
-        @if($scores)
+
+            <ul class="box-header">
+                <li class="box-header-items">Constestant Number</li>
+                <li class="box-header-items">Constestant Name</li>
+                <div style="display: flex" class="box-header-criteria">
+                @if($criterias)
+                    @foreach($criterias as $criteria)
+                        <li  class="box-header-items-criteria">{{$criteria->name}}</li>
+                    @endforeach
+                    @endif
+                </div>
+                <li style="margin-left: 30px;margin-right: 2px;font-size: 14px" class="box-header-items">Total</li>
+            </ul>
+
+                <div class="box-contents">
+                            <ul class="contestants-number">
+
+                                @if($contestants)
+
+                                    @foreach($contestants as $contestant)
+
+                                            <li class="contestants-number-items">{{$contestant->number}}</li>
 
 
-                            @foreach($contestants as $contestant)
-                            <div class="row">
+                                    @endforeach
+                                    @endif
+                            </ul>
 
-                                    <p class="col-lg-1">{{$contestant->number}}</p>
-                                <a href="{{route('admin.contestant.score.view',['event_id'=>$event->id,'$contestant_id'=>$contestant->number])}}"><p class="col-lg-1">{{$contestant->firstname ." ". $contestant->lastname}}</p></a>
-                            </div>
-                        @endforeach
+                            <ul class="contestants-name">
+                                @if($contestants)
+                                    @foreach($contestants as $contestant)
 
-        @endif
+
+                                        <li class="contestants-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>
+
+                                    @endforeach
+                                @endif
+
+                            </ul>
+
+
+
+                                <div class="box">
+                                @if($scores)
+
+                                @foreach($scores as $score)
+
+                                    <p style="order: {{$score->contestant_id}}"  class=" score-flex">{{$score->score}}</p>
+
+                                    @endforeach
+
+                                    @endif
+                                </div>
+
+                    <ul>
+                        @if($final_scores)
+                            @foreach($final_scores as $final)
+
+                                <p class="final-score" style="font-weight: bolder;font-size: 14px">{{$final->score}}</p>
+                                @endforeach
+
+                            @endif
+                    </ul>
+
+                </div>
+
 
             </div>
             <!-- /col-lg-9 END SECTION MIDDLE -->
