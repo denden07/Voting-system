@@ -133,7 +133,9 @@ class ScoreController extends Controller
         foreach ($contestants as $contestant)
         {
           $compute =  Computed::where('contestant_id',$contestant->id)->where('round_id',1)->sum('score');
-          print_r($compute/2);
+          $total_judge = User::where('event_id',$event_id)->count();
+
+          print_r($compute/$total_judge);
         }
 
 

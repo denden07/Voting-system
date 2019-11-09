@@ -86,7 +86,7 @@
 
         }
         .score-flex{
-            margin-right: 50px;
+            margin-right: 49px;
 
         }
         .final-score{

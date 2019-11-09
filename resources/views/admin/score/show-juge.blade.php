@@ -198,6 +198,8 @@
                         @endif
                     </ul>
 
+                    <a href="{{route('admin.tally.total.score',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+
 
 
 
