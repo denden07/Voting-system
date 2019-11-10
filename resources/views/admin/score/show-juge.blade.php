@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    View Score
+Select Judge
 @endsection
 
 
@@ -196,9 +196,11 @@
                         <li><a href="{{route('admin.contestant.view',['event_id'=>$event->id,'judge_id'=>$judge->id])}}">{{$judge->firstname . " ". $judge->lastname}}</a></li>
                             @endforeach
                         @endif
+                        <li><a href="{{route('admin.total.score',['event_id'=>$event->id])}}">Show Total Score</a></li>
                     </ul>
 
                     <a href="{{route('admin.tally.total.score',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+
 
 
 

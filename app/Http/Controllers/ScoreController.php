@@ -7,6 +7,7 @@ use App\Contestant;
 use App\Criteria;
 use App\Event;
 
+use App\FinalScore;
 use App\Judge;
 use App\Score;
 use App\User;
@@ -97,12 +98,28 @@ class ScoreController extends Controller
 
     public function showJudge($event_id){
 
+
+
         $event = Event::findOrFail($event_id);
         $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
         $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
         $judges = Judge::where('event_id',$event_id)->get();
 
         return view('admin.score.show-juge',compact('event','criterias2','criterias','judges'));
+    }
+
+    public function showTotalScore($event_id){
+
+        $event = Event::findOrFail($event_id);
+        $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
+        $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
+
+
+        $contestants = Contestant::where('event_id',$event_id)->get();
+
+        $finalScores =FinalScore::where('event_id',$event_id)->where('round_id',1)->get();
+
+        return view('admin.score.total-score',compact('event','criterias','criterias2','contestants','finalScores'));
     }
 
     public function viewContestantScore($event_id,$judge_id)
@@ -128,14 +145,22 @@ class ScoreController extends Controller
     {
 
         $contestants = Contestant::where('event_id',$event_id)->get();
+        $total_judge = User::where('event_id',$event_id)->count();
 
 
         foreach ($contestants as $contestant)
         {
           $compute =  Computed::where('contestant_id',$contestant->id)->where('round_id',1)->sum('score');
-          $total_judge = User::where('event_id',$event_id)->count();
 
-          print_r($compute/$total_judge);
+            $data = [
+                'contestant_id' => $contestant->id,
+                'finalScore' =>$compute/$total_judge,
+                'event_id'=>$event_id,
+                'round_id' => 1,
+            ];
+
+            FinalScore::create($data);
+
         }
 
 

@@ -61,6 +61,8 @@ Route::group(['middleware'=>'admin'],function (){
 
     Route::get('admin/choose/judge/{event_id}','ScoreController@showJudge')->name('admin.show.judge.score');
 
+    Route::get('admin/total/score/{event_id}','ScoreController@showTotalScore')->name('admin.total.score');
+
     Route::get('admin/tally/score/{event_id}','ScoreController@computeFinalScore')->name('admin.tally.total.score');
 
 
