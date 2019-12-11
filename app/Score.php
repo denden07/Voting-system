@@ -16,7 +16,7 @@ class Score extends Model
         return $this->belongsTo('App\Judge','judge_id');
     }
 
-    Public function contestant(){
+    public function contestant(){
         return $this->belongsTo('App\Contestant','contestant_id');
     }
 }

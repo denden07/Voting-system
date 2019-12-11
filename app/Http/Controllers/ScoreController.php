@@ -133,7 +133,11 @@ class ScoreController extends Controller
         $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
         $criterias2 =Criteria::where('event_id',$event_id)->where('round_id',2)->get();
 
+
+
+
         $contestants = Contestant::where('event_id',$event_id)->get();
+
 
         $scores =Score::where('event_id',$event_id)->where('judge_id',$judge->id)->orderBy('contestant_id','ASC')->orderBy('criteria_id','asc')->get();
 

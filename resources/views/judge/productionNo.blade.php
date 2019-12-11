@@ -5,37 +5,6 @@
 @endsection
 
 @section('css')
-<style>
-
-    .start-voting {
-        background-color: #4ECDC4;
-        box-shadow: 0 5px 0 black;
-        color: white;
-        padding: 1em 1.5em;
-
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: all .2s ease-in-out;
-        text-align: center;
-        margin-left: 44%;
-
-    }
-
-    .start-voting:hover {
-        background-color: #449d44;
-        color: white;
-        cursor: pointer;
-        transform: scale(1.5);
-
-    }
-
-    .start-voting:active {
-        box-shadow: none;
-        top: 5px;
-    }
-
-
-</style>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -56,6 +25,14 @@
     <link href="{{asset('ui/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('ui/css/style-responsive.css')}}" rel="stylesheet">
     <script src="{{asset('ui/lib/chart-master/Chart.js')}}"></script>
+    <style>
+        .selected{
+            background-color: #4ECDC4;
+            color:white;
+        }
+
+
+    </style>
 
 @endsection
 
@@ -86,7 +63,7 @@
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Preliminary</a></li>
+                        <li><a href="general.html">Preliminary</a></li>
                         <li><a href="buttons.html">Finals</a></li>
                     </ul>
                 </li>
@@ -110,17 +87,130 @@
                 <div class="col-lg-9 main-chart">
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
-                        <h1 style="text-align: center;font-size: 4.2em">{{$event->name}}</h1>
-                        <h2 style="text-align:center;margin-top: 1em; ">Welcome {{$user->judge->firstname ." ".$user->judge->lastname }}</h2>
+                        <h1>{{$event->name}}</h1>
+                        <h3>Contestant Score</h3>
+                    </div>
+
+
+                    {{--{!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}--}}
+
+                    {{--<table style="width:100%">--}}
+                    {{--<tr>--}}
+                    {{--<th>Contestant number</th>--}}
+                    {{--<th>Contestant Name</th>--}}
+                    {{--@foreach($criterias as $criteria)--}}
+                    {{--<th>{{$criteria->name}}</th>--}}
+
+                    {{--@endforeach--}}
+                    {{--</tr>--}}
+
+                    {{--@foreach($contestants as $contestant)--}}
+                    {{--<tr>--}}
+                    {{--<td>{{$contestant->number}}</td>--}}
+                    {{--<td>{{$contestant->firstname ." ". $contestant->lastname}}</td>--}}
+                    {{--@foreach($contestants as $key)--}}
+                    {{--<input style="display: none" name="contestant_id[]" value="{{$key->number}}" type="text">--}}
+                    {{--@endforeach--}}
+                    {{--@foreach($criterias as $criteria)--}}
+                    {{--<td><input style="width: 50px" name="score[]" type="text"></td>--}}
+                    {{--<input style="display: none" name="criteria_id[]" value="{{$criteria->id}}" type="text">--}}
+
+                    {{--@endforeach--}}
+
+                    {{--</tr>--}}
+                    {{--@endforeach--}}
+
+
+                    {{--</table>--}}
+
+
+
+
+
+                    {{--<div class="form-group">--}}
+                    {{--<div class="col-lg-offset-2 col-lg-10">--}}
+                    {{--{!! Form::submit('Submit Score',['class'=>'btn btn-theme']) !!}--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+
+
+
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+
+
+
+                            @foreach($criterias as $criteria)
+                                @php
+                                    $selector = $criteriaSelector;
+                                @endphp
+
+                                @if($criteria == $selector )
+                                    @php
+                                        $selector ="selected"
+                                    @endphp
+                                    <li class="{{$selector}}"><a class="{{$selector}}  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                @else
+                                    @php
+                                        $selector =""
+                                    @endphp
+                                    <li class="{{$selector}}"><a class="{{$selector}}"  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                @endif
+                            @endforeach
+                            <li><a href="{{route('judge.score.compute',['event_id'=>$event->id])}}">Submit Score</a></li>
+                        </ul>
+                        <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
+                        <div class="tab-content">
+                            <ul style="margin-top: 50px" class="nav nav-tabs">
+                                <li style="margin-left: 20px"><a href="#">Contestant Number</a></li>
+                                <li><a href="#">Contestant Name</a></li>
+                                <li style=" margin-left: 130px"><a href="#">Score</a></li>
+                            </ul>
+
+                            {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
+
+                            @foreach($contestants as $contestant )
+                                <div class="form-group">
+                                    <h2 style="margin-bottom:  -30px; " class="col-lg-3 col-lg-offset-1 ">{{$contestant->number}}</h2>
+                                    <p   style="margin-left: -220px;margin-top: 20px;font-size: 1.7em"  class=" col-lg-3" for="usr">{{$contestant ->firstname." ".$contestant ->lastname}}</p>
+                                    <div class="col-lg-3">
+                                        <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]">
+                                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            <div class="form-group">
+                                <div style="margin-top: 6%" class="col-lg-offset-4 col-lg-10">
+                                    {!! Form::submit('Submit Score',['class'=>'btn btn-theme']) !!}
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
 
 
 
-                    <p style="text-align:center;margin-top: 20%;font-size:2em;margin-bottom: 20%">Vote Honestly and enjoy the night!</p>
 
 
-                    <p style="text-align: center">click here to start voting</p>
-                    <a class="start-voting" style="" href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Start Voting</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -135,16 +225,16 @@
                         <h3>Criteria of the contest</h3>
                         <canvas id="newchart" height="130" width="130"></canvas>
                         <script>
-                        var doughnutData = [{
-                        value: 70,
-                        color: "#4ECDC4"
-                        },
-                        {
-                        value: 30,
-                        color: "#fdfdfd"
-                        }
-                        ];
-                        var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
+                            var doughnutData = [{
+                                value: 70,
+                                color: "#4ECDC4"
+                            },
+                                {
+                                    value: 30,
+                                    color: "#fdfdfd"
+                                }
+                            ];
+                            var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
                         </script>
                         <h4 style="margin-top: 50px">Preliminary</h4>
                         @if($criterias)
@@ -170,19 +260,19 @@
 
                     </div>
                     <!--NEW EARNING STATS -->
-                <div class="panel terques-chart">
-                <div class="panel-body">
-                <div class="chart">
-                <div class="centered">
-                <span>TODAY EARNINGS</span>
-                <strong>$ 890,00 | 15%</strong>
-                </div>
-                <br>
-                <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
-                </div>
-                </div>
-                </div>
-                <!--new earning end-->
+                    <div class="panel terques-chart">
+                        <div class="panel-body">
+                            <div class="chart">
+                                <div class="centered">
+                                    <span>TODAY EARNINGS</span>
+                                    <strong>$ 890,00 | 15%</strong>
+                                </div>
+                                <br>
+                                <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--new earning end-->
                     <!-- RECENT ACTIVITIES SECTION -->
                     <h4 class="centered mt">RECENT ACTIVITY</h4>
                     <!-- First Activity -->

@@ -79,6 +79,7 @@ class JudgeController extends Controller
        $user->photo_id = $photo->id;
        $user->judge_id = $judge->id;
        $user->email = $request->email;
+       $user->event_id = $event_id;
         $user->save();
         return back()->with('success','Judge is registered');
     }

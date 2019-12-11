@@ -188,8 +188,6 @@
                             @endforeach
                         @endif
                     </ul>
-
-
 </div>
                 </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->

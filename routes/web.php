@@ -79,6 +79,7 @@ Route::group(['middleware'=>'judge'],function () {
     Route::get('judge','JudgeHome@index')->name('judge.landing');
 
     Route::get('judge/criteria/{criteria_id}','JudgeHome@indexWithCriteria')->name('judge.select.criteria');
+    Route::get('judge/criteria/final/{criteria_id}','JudgeHome@finalStage')->name('judge.select.criteria.final');
 
 
 
@@ -88,6 +89,7 @@ Route::group(['middleware'=>'judge'],function () {
 
     Route::post('judge/score/submit/{event_id}/{criteria_selector}','JudgeHome@inputScore')->name('judge.score.save');
     Route::get('judge/score/compute/{event_id}','JudgeHome@computeScore')->name('judge.score.compute');
+    Route::get('judge/score/compute/final/{event_id}','JudgeHome@computeScore')->name('judge.score.compute.final');
 });
 
 

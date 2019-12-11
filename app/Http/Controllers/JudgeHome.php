@@ -7,6 +7,7 @@ use App\Contestant;
 use App\Criteria;
 use App\Event;
 
+use App\FinalScore;
 use App\Judge;
 use App\Score;
 use Illuminate\Http\Request;
@@ -64,9 +65,40 @@ class JudgeHome extends Controller
         $event = Event::findOrFail($event_id);
         $criteriaSelector=Criteria::where('id',$criteria_id)->first();
 
+
+
+
         return view('judge.index2',compact('user','judge','criterias','criterias2','event','contestants','criteriaSelector'));
 
     }
+
+
+    public function finalStage($criteria_id){
+        $user = Auth::user();
+        $event_id = $user ->judge->event_id;
+
+
+        $judge = Judge::findOrFail($user->judge_id);
+
+        $criterias =Criteria::where('event_id',$judge->event_id)->where('round_id',1)->get();
+        $criterias2 =Criteria::where('event_id',$judge->event_id)->where('round_id',2)->get();
+
+
+        $contestants = FinalScore::where('event_id',$judge->event_id)->where('round_id',1)->orderBy('finalScore','DESC')->take(3)->get();
+
+
+        $event = Event::findOrFail($event_id);
+        $criteriaSelector=Criteria::where('id',$criteria_id)->first();
+
+
+
+
+        return view('judge.finals',compact('user','judge','criterias','criterias2','event','contestants','criteriaSelector'));
+
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -102,8 +134,11 @@ class JudgeHome extends Controller
         $input = $request->all();
         $count = count($request->input('score'));
 
+
+
         $criteria = Criteria::where('id',$criteria_selector)->first();
         $criteriaDevider =$criteria->percentage;
+
 
 
 
@@ -121,9 +156,6 @@ class JudgeHome extends Controller
 
             if(empty($input['score'][$i]) || !is_numeric($input['score'][$i])) continue;
 
-
-
-
             $data = [
                 'contestant_id' => $input['contestant_id'][$i],
                 'score' => ($input['score'][$i]*$criteriaDevider)/100, // see above for why this might be a bad idea
@@ -138,7 +170,7 @@ class JudgeHome extends Controller
         }
 
 
-
+        return back()->with('success','Score is passed');
 
 
 
@@ -162,6 +194,25 @@ class JudgeHome extends Controller
            Computed::create($data);
         }
     }
+
+    public function computeScoreFinal(Request $request,$event_id){
+        $contestants = Contestant::where('event_id',$event_id)->get();
+        $user =Auth::user();
+
+        foreach ($contestants as $contestant){
+            $score = Score::where('contestant_id',$contestant->id)->where('judge_id',$user->id)->where('event_id',$event_id)->where('round_id',2)->sum('score');
+            $data = [
+                'contestant_id' =>$contestant->id,
+                'score' => $score,
+                'round_id' => 2,
+                'judge_id' => $user->id,
+                'event_id' => $event_id,
+            ];
+
+            Computed::create($data);
+        }
+    }
+
 
 
 

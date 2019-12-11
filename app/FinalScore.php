@@ -12,4 +12,7 @@ class FinalScore extends Model
       'contestant_id','finalScore','event_id','round_id'
     ];
 
+    public function contestant(){
+        return $this->belongsTo('App\Contestant','contestant_id');
+    }
 }

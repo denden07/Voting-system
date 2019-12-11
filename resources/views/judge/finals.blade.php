@@ -37,7 +37,7 @@
             width: 30px;
             height: 30px;
             position: relative;
-                              /******** <- Remove this line *********/
+            /******** <- Remove this line *********/
             border: 4px solid #Fff;
             animation: loader 2s infinite ease;
         }
@@ -107,7 +107,7 @@
 
 @section('body')
     <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"></span></span>
+        <span class="loader"><span class="loader-inner"></span></span>
 
 
         Loading...
@@ -138,7 +138,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Preliminary</a></li>
-                        <li><a href="{{route('judge.select.criteria.final',['criteria_id'=>9])}}">Finals</a></li>
+                        <li><a href="buttons.html">Finals</a></li>
                     </ul>
                 </li>
 
@@ -214,42 +214,42 @@
 
 
 
-                            @foreach($criterias as $criteria)
+                            @foreach($criterias2 as $criteria)
                                 @php
                                     $selector = $criteriaSelector;
                                 @endphp
 
                                 @if($criteria == $selector )
-                                        @php
+                                    @php
                                         $selector ="selected"
-                                        @endphp
-                                <li class="{{$selector}}"><a class="{{$selector}}  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
-                                    @else
-                                        @php
-                                            $selector =""
-                                        @endphp
-                                    <li class="{{$selector}}"><a class="{{$selector}}"  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
-                                    @endif
+                                    @endphp
+                                    <li class="{{$selector}}"><a class="{{$selector}}  href="{{route('judge.select.criteria.final',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                @else
+                                    @php
+                                        $selector =""
+                                    @endphp
+                                    <li class="{{$selector}}"><a class="{{$selector}}"  href="{{route('judge.select.criteria.final',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                @endif
                             @endforeach
                             <li style="background-color: #1b6d85"><a href="{{route('judge.score.compute',['event_id'=>$event->id])}}">Submit Score</a></li>
                         </ul>
                         <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
                         <div class="tab-content">
                             <ul style="margin-top: 50px" class="nav nav-tabs">
-                            <li style="margin-left: 20px"><a href="#">Contestant Number</a></li>
-                            <li><a href="#">Contestant Name</a></li>
+                                <li style="margin-left: 20px"><a href="#">Contestant Number</a></li>
+                                <li><a href="#">Contestant Name</a></li>
                                 <li style=" margin-left: 130px"><a href="#">Score</a></li>
                             </ul>
 
                             {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
 
-                        @foreach($contestants as $contestant )
+                            @foreach($contestants as $contestant )
                                 <div class="form-group">
-                                    <h2 style="margin-bottom:  -30px; " class="col-lg-3 col-lg-offset-1 ">{{$contestant->number}}</h2>
-                                    <p   style="margin-left: -220px;margin-top: 20px;font-size: 1.7em"  class=" col-lg-3" for="usr">{{$contestant ->firstname." ".$contestant ->lastname}}</p>
+                                    <h2 style="margin-bottom:  -30px; " class="col-lg-3 col-lg-offset-1 ">{{$contestant->contestant->number}}</h2>
+                                    <p   style="margin-left: -220px;margin-top: 20px;font-size: 1.7em"  class=" col-lg-3" for="usr">{{$contestant->contestant ->firstname." ".$contestant->contestant ->lastname}}</p>
                                     <div class="col-lg-3">
                                         <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]">
-                                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+                                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->contestant->id}}">
                                     </div>
                                 </div>
                             @endforeach
@@ -336,137 +336,137 @@
 
                     </div>
                     <!--NEW EARNING STATS -->
-                    {{--<div class="panel terques-chart">--}}
-                        {{--<div class="panel-body">--}}
-                            {{--<div class="chart">--}}
-                                {{--<div class="centered">--}}
-                                    {{--<span>TODAY EARNINGS</span>--}}
-                                    {{--<strong>$ 890,00 | 15%</strong>--}}
-                                {{--</div>--}}
-                                {{--<br>--}}
-                                {{--<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!--new earning end-->--}}
-                    {{--<!-- RECENT ACTIVITIES SECTION -->--}}
-                    {{--<h4 class="centered mt">RECENT ACTIVITY</h4>--}}
-                    {{--<!-- First Activity -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<muted>Just Now</muted>--}}
-                                {{--<br/>--}}
-                                {{--<a href="#">Paul Rudd</a> purchased an item.<br/>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Second Activity -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<muted>2 Minutes Ago</muted>--}}
-                                {{--<br/>--}}
-                                {{--<a href="#">James Brown</a> subscribed to your newsletter.<br/>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Third Activity -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<muted>3 Hours Ago</muted>--}}
-                                {{--<br/>--}}
-                                {{--<a href="#">Diana Kennedy</a> purchased a year subscription.<br/>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Fourth Activity -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<muted>7 Hours Ago</muted>--}}
-                                {{--<br/>--}}
-                                {{--<a href="#">Brando Page</a> purchased a year subscription.<br/>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- USERS ONLINE SECTION -->--}}
-                    {{--<h4 class="centered mt">TEAM MEMBERS ONLINE</h4>--}}
-                    {{--<!-- First Member -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<img class="img-circle" src="img/ui-divya.jpg" width="35px" height="35px" align="">--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<a href="#">DIVYA MANIAN</a><br/>--}}
-                                {{--<muted>Available</muted>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Second Member -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<img class="img-circle" src="img/ui-sherman.jpg" width="35px" height="35px" align="">--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<a href="#">DJ SHERMAN</a><br/>--}}
-                                {{--<muted>I am Busy</muted>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Third Member -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<img class="img-circle" src="img/ui-danro.jpg" width="35px" height="35px" align="">--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<a href="#">DAN ROGERS</a><br/>--}}
-                                {{--<muted>Available</muted>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Fourth Member -->--}}
-                    {{--<div class="desc">--}}
-                        {{--<div class="thumb">--}}
-                            {{--<img class="img-circle" src="img/ui-zac.jpg" width="35px" height="35px" align="">--}}
-                        {{--</div>--}}
-                        {{--<div class="details">--}}
-                            {{--<p>--}}
-                                {{--<a href="#">Zac Sniders</a><br/>--}}
-                                {{--<muted>Available</muted>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- CALENDAR-->--}}
-                    {{--<div id="calendar" class="mb">--}}
-                        {{--<div class="panel green-panel no-margin">--}}
-                            {{--<div class="panel-body">--}}
-                                {{--<div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">--}}
-                                    {{--<div class="arrow"></div>--}}
-                                    {{--<h3 class="popover-title" style="disadding: none;"></h3>--}}
-                                    {{--<div id="date-popover-content" class="popover-content"></div>--}}
-                                {{--</div>--}}
-                                {{--<div id="my-calendar"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    <!-- / calendar -->
+                {{--<div class="panel terques-chart">--}}
+                {{--<div class="panel-body">--}}
+                {{--<div class="chart">--}}
+                {{--<div class="centered">--}}
+                {{--<span>TODAY EARNINGS</span>--}}
+                {{--<strong>$ 890,00 | 15%</strong>--}}
+                {{--</div>--}}
+                {{--<br>--}}
+                {{--<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!--new earning end-->--}}
+                {{--<!-- RECENT ACTIVITIES SECTION -->--}}
+                {{--<h4 class="centered mt">RECENT ACTIVITY</h4>--}}
+                {{--<!-- First Activity -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<muted>Just Now</muted>--}}
+                {{--<br/>--}}
+                {{--<a href="#">Paul Rudd</a> purchased an item.<br/>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Second Activity -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<muted>2 Minutes Ago</muted>--}}
+                {{--<br/>--}}
+                {{--<a href="#">James Brown</a> subscribed to your newsletter.<br/>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Third Activity -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<muted>3 Hours Ago</muted>--}}
+                {{--<br/>--}}
+                {{--<a href="#">Diana Kennedy</a> purchased a year subscription.<br/>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Fourth Activity -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<muted>7 Hours Ago</muted>--}}
+                {{--<br/>--}}
+                {{--<a href="#">Brando Page</a> purchased a year subscription.<br/>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- USERS ONLINE SECTION -->--}}
+                {{--<h4 class="centered mt">TEAM MEMBERS ONLINE</h4>--}}
+                {{--<!-- First Member -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<img class="img-circle" src="img/ui-divya.jpg" width="35px" height="35px" align="">--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<a href="#">DIVYA MANIAN</a><br/>--}}
+                {{--<muted>Available</muted>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Second Member -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<img class="img-circle" src="img/ui-sherman.jpg" width="35px" height="35px" align="">--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<a href="#">DJ SHERMAN</a><br/>--}}
+                {{--<muted>I am Busy</muted>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Third Member -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<img class="img-circle" src="img/ui-danro.jpg" width="35px" height="35px" align="">--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<a href="#">DAN ROGERS</a><br/>--}}
+                {{--<muted>Available</muted>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Fourth Member -->--}}
+                {{--<div class="desc">--}}
+                {{--<div class="thumb">--}}
+                {{--<img class="img-circle" src="img/ui-zac.jpg" width="35px" height="35px" align="">--}}
+                {{--</div>--}}
+                {{--<div class="details">--}}
+                {{--<p>--}}
+                {{--<a href="#">Zac Sniders</a><br/>--}}
+                {{--<muted>Available</muted>--}}
+                {{--</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- CALENDAR-->--}}
+                {{--<div id="calendar" class="mb">--}}
+                {{--<div class="panel green-panel no-margin">--}}
+                {{--<div class="panel-body">--}}
+                {{--<div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">--}}
+                {{--<div class="arrow"></div>--}}
+                {{--<h3 class="popover-title" style="disadding: none;"></h3>--}}
+                {{--<div id="date-popover-content" class="popover-content"></div>--}}
+                {{--</div>--}}
+                {{--<div id="my-calendar"></div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                <!-- / calendar -->
                 </div>
                 <!-- /col-lg-3 -->
             </div>
@@ -577,11 +577,11 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     </script>
-<script>
-    $(window).on("load",function(){
-        $(".loader-wrapper").fadeOut(2000);
-    });
-</script>
+    <script>
+        $(window).on("load",function(){
+            $(".loader-wrapper").fadeOut(2000);
+        });
+    </script>
 
 
 
