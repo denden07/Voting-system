@@ -148,22 +148,40 @@ class ScoreController extends Controller
     public function computeFinalScore($event_id)
     {
 
-        $contestants = Contestant::where('event_id',$event_id)->get();
+
         $total_judge = User::where('event_id',$event_id)->count();
 
-
+        $contestants = Contestant::where('event_id',$event_id)->where('sex_id',2)->get();
         foreach ($contestants as $contestant)
         {
-          $compute =  Computed::where('contestant_id',$contestant->id)->where('round_id',1)->sum('score');
+          $compute =  Computed::where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data = [
                 'contestant_id' => $contestant->id,
                 'finalScore' =>$compute/$total_judge,
                 'event_id'=>$event_id,
                 'round_id' => 1,
+                'sex_id'=>2,
             ];
 
             FinalScore::create($data);
+
+        }
+
+        $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
+        foreach ($contestants2 as $contestant2)
+        {
+            $compute2 =  Computed::where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+
+            $data2 = [
+                'contestant_id' => $contestant2->id,
+                'finalScore' =>$compute2/$total_judge,
+                'event_id'=>$event_id,
+                'round_id' => 1,
+                'sex_id'=>1,
+            ];
+
+            FinalScore::create($data2);
 
         }
 

@@ -9,7 +9,7 @@ class Score extends Model
     //
 
     protected $fillable=[
-        'contestant_id','criteria_id','score','judge_id','event_id'
+        'contestant_id','criteria_id','score','judge_id','event_id','sex_id','round_id',
     ];
 
     public function judge(){

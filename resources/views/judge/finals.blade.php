@@ -138,7 +138,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Preliminary</a></li>
-                        <li><a href="buttons.html">Finals</a></li>
+                        <li><a href="{{route('judge.select.criteria.final',['criteria_id'=>15])}}">Finals</a></li>
                     </ul>
                 </li>
 
@@ -209,7 +209,7 @@
 
 
 
-                    <div class="container">
+                    <div style="width: 100%">
                         <ul class="nav nav-tabs">
 
 
@@ -231,31 +231,62 @@
                                     <li class="{{$selector}}"><a class="{{$selector}}"  href="{{route('judge.select.criteria.final',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
                                 @endif
                             @endforeach
-                            <li style="background-color: #1b6d85"><a href="{{route('judge.score.compute',['event_id'=>$event->id])}}">Submit Score</a></li>
+                            <li style="background-color: #1b6d85"><a href="{{route('judge.score.compute.final',['event_id'=>$event->id])}}">Submit Score</a></li>
                         </ul>
                         <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
-                        <div class="tab-content">
-                            <ul style="margin-top: 50px" class="nav nav-tabs">
-                                <li style="margin-left: 20px"><a href="#">Contestant Number</a></li>
-                                <li><a href="#">Contestant Name</a></li>
-                                <li style=" margin-left: 130px"><a href="#">Score</a></li>
-                            </ul>
-
-                            {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
-
-                            @foreach($contestants as $contestant )
-                                <div class="form-group">
-                                    <h2 style="margin-bottom:  -30px; " class="col-lg-3 col-lg-offset-1 ">{{$contestant->contestant->number}}</h2>
-                                    <p   style="margin-left: -220px;margin-top: 20px;font-size: 1.7em"  class=" col-lg-3" for="usr">{{$contestant->contestant ->firstname." ".$contestant->contestant ->lastname}}</p>
-                                    <div class="col-lg-3">
-                                        <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]">
-                                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->contestant->id}}">
-                                    </div>
-                                </div>
-                            @endforeach
 
 
+                        <div style="width: 100%">
+                            <div style="padding: 50px" class="col-lg-6 ">
 
+
+                                <table style="width: 100%">
+
+                                    <tr>
+                                        <th width="50%" style="margin-right: 2px">Contestant #</th>
+                                        <th width="50%">Name</th>
+                                        <th width="25%">Score</th>
+                                    </tr>
+                                    {!! Form::open(['method'=>'POST','route'=>['judge.score.save.final',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
+
+                                    @foreach($contestants as $contestant )
+                                        <tr>
+                                            <td width="50%">{{$contestant->contestant->number}}</td>
+                                            <td width="50%">{{$contestant ->contestant ->firstname." ".$contestant ->contestant ->lastname}}</td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]"></td>
+                                            <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant ->contestant->id}}">
+
+                                        </tr>
+                                    @endforeach
+                                </table>
+
+
+                            </div>
+
+                            <div style="padding: 50px" class="col-lg-6 ">
+
+
+                                <table style="width: 100%">
+
+                                    <tr>
+                                        <th width="25%">Contestant #</th>
+                                        <th width="25%">Name</th>
+                                        <th width="25%">Score</th>
+                                    </tr>
+
+                                    @foreach($contestants2 as $contestant2 )
+                                        <tr>
+                                            <td width="25%">{{$contestant2->contestant->number}}</td>
+                                            <td width="25%">{{$contestant2 ->contestant ->firstname." ".$contestant2 ->contestant ->lastname}}</td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score2[]"></td>
+                                            <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2 ->contestant->id}}">
+
+                                        </tr>
+                                    @endforeach
+                                </table>
+
+
+                            </div>
 
                             <div class="form-group">
                                 <div style="margin-top: 6%" class="col-lg-offset-4 col-lg-10">
@@ -264,33 +295,15 @@
                             </div>
 
 
+
                         </div>
+
+
+
+
+</div>
+
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->
                 <!-- **********************************************************************************************************************************************************
                     RIGHT SIDEBAR CONTENT

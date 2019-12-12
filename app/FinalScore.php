@@ -9,7 +9,7 @@ class FinalScore extends Model
     //
 
     protected $fillable =[
-      'contestant_id','finalScore','event_id','round_id'
+      'contestant_id','finalScore','event_id','round_id','sex_id'
     ];
 
     public function contestant(){

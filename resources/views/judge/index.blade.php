@@ -87,9 +87,11 @@
                     </a>
                     <ul class="sub">
                         <li><a href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Preliminary</a></li>
-                        <li><a href="buttons.html">Finals</a></li>
+                        <li><a href="{{route('judge.select.criteria.final',['criteria_id'=>15])}}">Finals</a></li>
                     </ul>
                 </li>
+
+
 
 
             </ul>
