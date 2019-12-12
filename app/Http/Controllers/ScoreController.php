@@ -141,7 +141,7 @@ class ScoreController extends Controller
         return view('admin.score.total-score',compact('event','criterias','criterias2','contestants','finalScores','finalScores2'));
     }
 
-    public function showTotalScoreAwards($event_id){
+    public function showTotalScoreAwards($event_id,$criteria_id){
 
         $event = Event::findOrFail($event_id);
         $criterias =Criteria::where('event_id',$event_id)->where('round_id',1)->get();
@@ -155,12 +155,12 @@ class ScoreController extends Controller
         $finalScores =FinalScore::where('event_id',$event_id)->where('sex_id',2)->where('round_id',1)->get();
         $finalScores2 =FinalScore::where('event_id',$event_id)->where('sex_id',1)->where('round_id',1)->get();
 
-        $productionNOs = Award::where('criteria_id',9)->where('sex_id',2)->where('round_id',1)->where('event_id',$event_id)->get();
-        $productionNOs2 = Award::where('criteria_id',9)->where('sex_id',1)->where('round_id',1)->where('event_id',$event_id)->get();
+        $criteriaSelector=Criteria::where('id',$criteria_id)->first();
+        $productionNOs = Award::where('criteria_id',$criteriaSelector->id)->where('sex_id',2)->where('round_id',1)->where('event_id',$event_id)->get();
+        $productionNOs2 = Award::where('criteria_id',$criteriaSelector->id)->where('sex_id',1)->where('round_id',1)->where('event_id',$event_id)->get();
 
 
-
-        return view('admin.score.awards',compact('event','criterias','criterias2','contestants','finalScores','finalScores2','productionNOs','productionNOs2'));
+        return view('admin.score.awards',compact('event','criterias','criterias2','contestants','finalScores','finalScores2','productionNOs','productionNOs2','criteriaSelector'));
     }
 
 

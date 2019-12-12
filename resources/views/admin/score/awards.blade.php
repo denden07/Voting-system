@@ -62,7 +62,10 @@
             margin-top: 10px;
             font-size: 16px;
         }
-
+        .selected{
+            background-color: #4ECDC4;
+            color:white;
+        }
 
     </style>
 
@@ -159,7 +162,30 @@
                         <h3>Total Score For Round 1</h3>
                     </div>
 
-<h2>Production Number</h2>
+                    <ul class="nav nav-tabs">
+
+
+
+                        @foreach($criterias as $criteria)
+                            @php
+                                $selector = $criteriaSelector;
+                            @endphp
+
+                            @if($criteria == $selector )
+                                @php
+                                    $selector ="selected"
+                                @endphp
+                                <li style="font-size: 14px" class="{{$selector}}"><a class="{{$selector}}  href="{{route('admin.total.score.awards',['event_id'=>$event->id,'criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                            @else
+                                @php
+                                    $selector =""
+                                @endphp
+                                <li style="font-size: 14px" class="{{$selector}}"><a class="{{$selector}}"  href="{{route('admin.total.score.awards',['event_id'=>$event->id,'criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                            @endif
+                        @endforeach
+
+                    </ul>
+                    <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
 
 <p>Female</p>
                     <table id="example" class="display" style="width:100%">
@@ -209,54 +235,7 @@
                     <br>
 
 
-                    <h2>Production Number</h2>
 
-                    <p>Female</p>
-                    <table id="example3" class="display" style="width:100%">
-                        <thead>
-                        <tr>
-                            <th>Contestant #</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($productionNOs as $finalScore )
-                            <tr>
-
-                                <td>{{$finalScore->contestant->number}}</td>
-                                <td>{{$finalScore->contestant->firstname ." ". $finalScore->contestant->lastname}}</td>
-                                <td>{{$finalScore->score}}</td>
-
-                            </tr>
-
-                        @endforeach
-                    </table>
-
-
-                    <p>Male</p>
-                    <table id="example4" class="display" style="width:100%">
-                        <thead>
-                        <tr>
-                            <th>Contestant #</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($productionNOs2 as $finalScore2 )
-                            <tr>
-
-                                <td>{{$finalScore2->contestant->number}}</td>
-                                <td>{{$finalScore2->contestant->firstname ." ". $finalScore2->contestant->lastname}}</td>
-                                <td>{{$finalScore2->score}}</td>
-
-                            </tr>
-
-                        @endforeach
-                    </table>
-                    <br>
-                    <br>
 
                 </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->

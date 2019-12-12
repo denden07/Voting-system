@@ -197,7 +197,7 @@
                             @endforeach
                         @endif
                         <li><a href="{{route('admin.total.score.final',['event_id'=>$event->id])}}">Show Total Score</a></li>
-                            <li><a href="{{route('admin.total.score.awards',['event_id'=>$event->id])}}">Show Awards Score</a></li>
+                            <li><a href="{{route('admin.total.score.awards',['event_id'=>$event->id,'criteria_id'=>9])}}">Show Awards Score</a></li>
                     </ul>
 
 

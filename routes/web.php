@@ -67,7 +67,7 @@ Route::group(['middleware'=>'admin'],function (){
 
     Route::get('admin/total/score/{event_id}','ScoreController@showTotalScore')->name('admin.total.score');
     Route::get('admin/total/score/final/{event_id}','ScoreController@showTotalScoreFinal')->name('admin.total.score.final');
-    Route::get('admin/total/score/awards/{event_id}','ScoreController@showTotalScoreAwards')->name('admin.total.score.awards');
+    Route::get('admin/total/score/awards/{event_id}/{criteria_id}','ScoreController@showTotalScoreAwards')->name('admin.total.score.awards');
 
     Route::get('admin/tally/score/{event_id}','ScoreController@computeFinalScore')->name('admin.tally.total.score');
 
@@ -89,6 +89,7 @@ Route::group(['middleware'=>'judge'],function () {
     Route::get('judge','JudgeHome@index')->name('judge.landing');
 
     Route::get('judge/criteria/{criteria_id}','JudgeHome@indexWithCriteria')->name('judge.select.criteria');
+
     Route::get('judge/criteria/final/{criteria_id}','JudgeHome@finalStage')->name('judge.select.criteria.final');
 
 
