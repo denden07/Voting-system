@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Select Judge
+    Select Judge
 @endsection
 
 
@@ -193,13 +193,14 @@ Select Judge
                     <ul>
                         @if($judges)
                             @foreach($judges as $judge)
-                        <li><a href="{{route('admin.contestant.view',['event_id'=>$event->id,'judge_id'=>$judge->id])}}">{{$judge->firstname . " ". $judge->lastname}}</a></li>
+                                <li><a href="{{route('admin.contestant.view.final',['event_id'=>$event->id,'judge_id'=>$judge->id])}}">{{$judge->firstname . " ". $judge->lastname}}</a></li>
                             @endforeach
                         @endif
-                        <li><a href="{{route('admin.total.score',['event_id'=>$event->id])}}">Show Total Score</a></li>
+                        <li><a href="{{route('admin.total.score.final',['event_id'=>$event->id])}}">Show Total Score</a></li>
                     </ul>
 
-                    <a href="{{route('admin.tally.total.score',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+
+                    <a href="{{route('admin.tally.total.score.final',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
 
 
 

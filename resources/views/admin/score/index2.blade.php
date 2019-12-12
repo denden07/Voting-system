@@ -1,11 +1,20 @@
 @extends('layouts.admin')
 @section('title')
-Select Judge
+    View Score
 @endsection
 
 
 @section('css')
     <link href="{{asset('fontawesome-free-5.11.2-web/css/all.css')}}" rel="stylesheet">
+
+    {{--for data table--}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+
+
+
+
 
     <!-- Favicons -->
     <link href="{{asset('ui/img/favicon.png')}}" rel="icon">
@@ -86,7 +95,7 @@ Select Judge
 
         }
         .score-flex{
-            margin-right: 50px;
+            margin-right: 49px;
 
         }
         .final-score{
@@ -186,22 +195,105 @@ Select Judge
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1>{{$event->name}}</h1>
-                        <h3>Select Judge</h3>
+                        <h3>Scored by</h3>
                     </div>
 
 
-                    <ul>
-                        @if($judges)
-                            @foreach($judges as $judge)
-                        <li><a href="{{route('admin.contestant.view',['event_id'=>$event->id,'judge_id'=>$judge->id])}}">{{$judge->firstname . " ". $judge->lastname}}</a></li>
-                            @endforeach
-                        @endif
-                        <li><a href="{{route('admin.total.score',['event_id'=>$event->id])}}">Show Total Score</a></li>
-                    </ul>
 
-                    <a href="{{route('admin.tally.total.score',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+                    {{--<ul class="box-header">--}}
+                    {{--<li class="box-header-items">Constestant Number</li>--}}
+                    {{--<li class="box-header-items">Constestant Name</li>--}}
+                    {{--<div style="display: flex" class="box-header-criteria">--}}
+                    {{--@if($criterias)--}}
+                    {{--@foreach($criterias as $criteria)--}}
+                    {{--<li  class="box-header-items-criteria">{{$criteria->name}}</li>--}}
+                    {{--@endforeach--}}
+                    {{--@endif--}}
+                    {{--</div>--}}
+                    {{--<li style="margin-left: 30px;margin-right: 2px;font-size: 14px" class="box-header-items">Total</li>--}}
+                    {{--</ul>--}}
 
 
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Contestant #</th>
+                            <th>Name</th>
+
+
+                            @if($criterias2)
+                                @foreach($criterias2 as $criteria2)
+                                    <th>{{$criteria2->name}}</th>
+                                @endforeach
+                            @endif
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($contestants as $contestant)
+                            <tr>
+
+                                <td>{{$contestant->number}}</td>
+
+                                <td>{{$contestant->firstname ." ". $contestant->lastname}}</td>
+
+
+
+                        @endforeach
+
+                    </table>
+
+
+                    {{--<div class="box-contents">--}}
+                    {{--<ul class="contestants-number">--}}
+
+                    {{--@if($contestants)--}}
+
+                    {{--@foreach($contestants as $contestant)--}}
+
+                    {{--<li class="contestants-number-items">{{$contestant->number}}</li>--}}
+
+
+                    {{--@endforeach--}}
+                    {{--@endif--}}
+                    {{--</ul>--}}
+
+                    {{--<ul class="contestants-name">--}}
+                    {{--@if($contestants)--}}
+                    {{--@foreach($contestants as $contestant)--}}
+
+
+                    {{--<li class="contestants-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>--}}
+
+                    {{--@endforeach--}}
+                    {{--@endif--}}
+
+                    {{--</ul>--}}
+
+
+
+                    {{--<div class="box">--}}
+                    {{--@if($scores)--}}
+
+                    {{--@foreach($scores as $score)--}}
+
+                    {{--<p style="order: {{$score->contestant_id}}"  class=" score-flex">{{$score->score}}</p>--}}
+
+                    {{--@endforeach--}}
+
+                    {{--@endif--}}
+                    {{--</div>--}}
+
+                    {{--<ul>--}}
+                    {{--@if($final_scores)--}}
+                    {{--@foreach($final_scores as $final)--}}
+
+                    {{--<p class="final-score" style="font-weight: bolder;font-size: 14px">{{$final->score}}</p>--}}
+                    {{--@endforeach--}}
+
+                    {{--@endif--}}
+                    {{--</ul>--}}
+
+                    {{--</div>--}}
 
 
 
@@ -472,5 +564,41 @@ Select Judge
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     </script>
+
+
+    {{--For Data Tabel--}}
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            } );
+        } );
+    </script>
+
 
 @endsection

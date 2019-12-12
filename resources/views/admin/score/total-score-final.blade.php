@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Select Judge
+    Select Judge
 @endsection
 
 
@@ -22,75 +22,40 @@ Select Judge
     <link href="{{asset('ui/css/style-responsive.css')}}" rel="stylesheet">
     <script src="{{asset('ui/lib/chart-master/Chart.js')}}"></script>
     <style>
-
-        .table-style{
-            padding: 8px;
-            margin: 35px;
-        }
-
-
-
-
-        .box-header{
-            flex-direction: row;
-            display: flex;
-        }
-        .box-header-items{
-
-            margin-right: 25px;
-
-            margin-left: -1px;
-        }
-
-        .box-contents{
+        .total-score{
             display: flex;
         }
 
-        .contestants-number{
-            margin-right: 50px;
+
+        .final-heading-items{
+            font-size: 16px;
+            text-align: center;
+        }
+        .final-heading{
+            border-spacing: 25px;
+
+            border-collapse: separate;
+        }
+
+        .final-contestant-number{
+            font-size: 16px;
             margin-left: 50px;
+            margin-right: 60px;
 
         }
-
-        .contestants-name{
-
-
-            display: flex;
-            flex-direction: column;
-        }
-        .contestants-name-items{
-            height: 50px;
-            width: 90px;
-            font-size: 15px;
-
-        }
-        .contestants-number-items{
-            height: 50px;
-
-        }
-        .box-header-criteria{
-            width: 500px;
-        }
-        .box-header-items-criteria{
-            margin-right: 9px;
-            font-weight: bold;
-
-
+        .final-contestant-number-items{
+            margin-top: 10px;
+            font-size: 16px;
         }
 
-        .box{
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: 70px;
-            width: 400px;
-
+        .final-contestant-name-items{
+            margin-top: 10px;
+            font-size: 16px;
         }
-        .score-flex{
-            margin-right: 50px;
 
-        }
-        .final-score{
-            height: 40px;
+        .final-contestant-score-items{
+            margin-top: 10px;
+            font-size: 16px;
         }
 
 
@@ -186,25 +151,44 @@ Select Judge
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1>{{$event->name}}</h1>
-                        <h3>Select Judge</h3>
+                        <h3>Total Score For Round 1</h3>
                     </div>
 
 
-                    <ul>
-                        @if($judges)
-                            @foreach($judges as $judge)
-                        <li><a href="{{route('admin.contestant.view',['event_id'=>$event->id,'judge_id'=>$judge->id])}}">{{$judge->firstname . " ". $judge->lastname}}</a></li>
-                            @endforeach
-                        @endif
-                        <li><a href="{{route('admin.total.score',['event_id'=>$event->id])}}">Show Total Score</a></li>
-                    </ul>
+                    <table class="final-heading">
+                        <tr>
+                            <th class="final-heading-items">Contestant Number</th>
+                            <th class="final-heading-items">Contestant Name</th>
+                            <th class="final-heading-items">Total Score</th>
+                        </tr>
+                    </table>
 
-                    <a href="{{route('admin.tally.total.score',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+                    <div class="total-score">
+                        <ul class="final-contestant-number">
+                            @if($contestants)
+                                @foreach($contestants as $contestant)
+                                    <li class="final-contestant-number-items">{{$contestant->number}}</li>
+                                @endforeach
+                            @endif
 
+                        </ul>
 
+                        <ul class="final-contestant-name">
+                            @if($contestants)
+                                @foreach($contestants as $contestant)
+                                    <li class="final-contestant-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>
+                                @endforeach
+                            @endif
+                        </ul>
 
-
-
+                        <ul class="final-contestant-score">
+                            @if($finalScores)
+                                @foreach($finalScores as $finalScore)
+                                    <li class="final-contestant-score-items">{{$finalScore->finalScore}}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                 </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->
                 <!-- **********************************************************************************************************************************************************

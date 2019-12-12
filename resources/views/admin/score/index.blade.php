@@ -178,7 +178,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{route('admin.show.judge.score',['event_id'=>$event->id])}}">Prelims</a></li>
-                    <li><a href="buttons.html">Finals</a></li>
+                    <li><a href="{{route('admin.show.judge.score.final',['event_id'=>$event->id])}}">Finals</a></li>
                 </ul>
             </li>
 
