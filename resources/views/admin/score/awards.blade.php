@@ -33,7 +33,7 @@
 
 
         .final-heading-items{
-           font-size: 16px;
+            font-size: 16px;
             text-align: center;
         }
         .final-heading{
@@ -159,7 +159,9 @@
                         <h3>Total Score For Round 1</h3>
                     </div>
 
+<h2>Production Number</h2>
 
+<p>Female</p>
                     <table id="example" class="display" style="width:100%">
                         <thead>
                         <tr>
@@ -169,12 +171,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($finalScores as $finalScore )
+                        @foreach($productionNOs as $finalScore )
                             <tr>
 
                                 <td>{{$finalScore->contestant->number}}</td>
                                 <td>{{$finalScore->contestant->firstname ." ". $finalScore->contestant->lastname}}</td>
-                                <td>{{$finalScore->finalScore}}</td>
+                                <td>{{$finalScore->score}}</td>
 
                             </tr>
 
@@ -182,7 +184,7 @@
                     </table>
 
 
-
+                    <p>Male</p>
                     <table id="example2" class="display" style="width:100%">
                         <thead>
                         <tr>
@@ -192,12 +194,39 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($finalScores2 as $finalScore2 )
+                        @foreach($productionNOs2 as $finalScore2 )
                             <tr>
 
                                 <td>{{$finalScore2->contestant->number}}</td>
                                 <td>{{$finalScore2->contestant->firstname ." ". $finalScore2->contestant->lastname}}</td>
-                                <td>{{$finalScore2->finalScore}}</td>
+                                <td>{{$finalScore2->score}}</td>
+
+                            </tr>
+
+                        @endforeach
+                    </table>
+<br>
+                    <br>
+
+
+                    <h2>Production Number</h2>
+
+                    <p>Female</p>
+                    <table id="example3" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Contestant #</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($productionNOs as $finalScore )
+                            <tr>
+
+                                <td>{{$finalScore->contestant->number}}</td>
+                                <td>{{$finalScore->contestant->firstname ." ". $finalScore->contestant->lastname}}</td>
+                                <td>{{$finalScore->score}}</td>
 
                             </tr>
 
@@ -205,7 +234,31 @@
                     </table>
 
 
-                    </div>
+                    <p>Male</p>
+                    <table id="example4" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Contestant #</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($productionNOs2 as $finalScore2 )
+                            <tr>
+
+                                <td>{{$finalScore2->contestant->number}}</td>
+                                <td>{{$finalScore2->contestant->firstname ." ". $finalScore2->contestant->lastname}}</td>
+                                <td>{{$finalScore2->score}}</td>
+
+                            </tr>
+
+                        @endforeach
+                    </table>
+                    <br>
+                    <br>
+
+                </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->
                 <!-- **********************************************************************************************************************************************************
                     RIGHT SIDEBAR CONTENT
@@ -512,6 +565,34 @@
     <script>
         $(document).ready(function() {
             $('#example2').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            } );
+        } );
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example3').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            } );
+        } );
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#exampl4').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
                     'copyHtml5',

@@ -71,6 +71,7 @@
             height: 50px;
             width: 90px;
             font-size: 15px;
+            margin-bottom: 1%;
 
         }
         .contestants-number-items{
@@ -91,7 +92,7 @@
             display: flex;
             flex-wrap: wrap;
             margin-left: 70px;
-            width: 400px;
+            width: 500px;
 
         }
         .score-flex{
@@ -200,88 +201,93 @@
 
 
 
-            {{--<ul class="box-header">--}}
-                {{--<li class="box-header-items">Constestant Number</li>--}}
-                {{--<li class="box-header-items">Constestant Name</li>--}}
-                {{--<div style="display: flex" class="box-header-criteria">--}}
-                {{--@if($criterias)--}}
-                    {{--@foreach($criterias as $criteria)--}}
-                        {{--<li  class="box-header-items-criteria">{{$criteria->name}}</li>--}}
-                    {{--@endforeach--}}
-                    {{--@endif--}}
-                {{--</div>--}}
-                {{--<li style="margin-left: 30px;margin-right: 2px;font-size: 14px" class="box-header-items">Total</li>--}}
-            {{--</ul>--}}
-
-
-                <table id="example" class="display" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Contestant #</th>
-                        <th>Name</th>
-
-
-                        @if($criterias)
-                            @foreach($criterias as $criteria)
-                                <th>{{$criteria->name}}</th>
-                         @endforeach
-                          @endif
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($contestants as $contestant)
-                    <tr>
-
-                        <td>{{$contestant->number}}</td>
-
-                        <td>{{$contestant->firstname ." ". $contestant->lastname}}</td>
-
-
-
+            <ul class="box-header">
+                <li class="box-header-items">Constestant Number</li>
+                <li class="box-header-items">Constestant Name</li>
+                <div style="display: flex" class="box-header-criteria">
+                @if($criterias)
+                    @foreach($criterias as $criteria)
+                        <li  class="box-header-items-criteria">{{$criteria->name}}</li>
                     @endforeach
-
-                </table>
-
-
-                {{--<div class="box-contents">--}}
-                            {{--<ul class="contestants-number">--}}
-
-                                {{--@if($contestants)--}}
-
-                                    {{--@foreach($contestants as $contestant)--}}
-
-                                            {{--<li class="contestants-number-items">{{$contestant->number}}</li>--}}
+                    @endif
+                </div>
+                <li style="margin-left: 30px;margin-right: 2px;font-size: 14px" class="box-header-items">Total</li>
+            </ul>
 
 
-                                    {{--@endforeach--}}
-                                    {{--@endif--}}
-                            {{--</ul>--}}
-
-                            {{--<ul class="contestants-name">--}}
-                                {{--@if($contestants)--}}
-                                    {{--@foreach($contestants as $contestant)--}}
+                {{--<table id="example" class="display" style="width:100%">--}}
+                    {{--<thead>--}}
+                    {{--<tr>--}}
+                        {{--<th>Contestant #</th>--}}
+                        {{--<th>Name</th>--}}
 
 
-                                        {{--<li class="contestants-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>--}}
+                        {{--@if($criterias)--}}
+                            {{--@foreach($criterias as $criteria)--}}
+                                {{--<th>{{$criteria->name}}</th>--}}
+                         {{--@endforeach--}}
+                          {{--@endif--}}
+                    {{--</tr>--}}
+                    {{--</thead>--}}
+                    {{--<tbody>--}}
+                    {{--@foreach($contestants as $contestant)--}}
+                    {{--<tr>--}}
 
-                                    {{--@endforeach--}}
-                                {{--@endif--}}
+                        {{--<td>{{$contestant->number}}</td>--}}
 
-                            {{--</ul>--}}
+                        {{--<td>{{$contestant->firstname ." ". $contestant->lastname}}</td>--}}
+
+                        {{--@foreach($scores as $score)--}}
+
+                            {{--<td>{{$score->score}}</td>--}}
+
+                            {{--@endforeach--}}
+
+
+                    {{--@endforeach--}}
+
+                {{--</table>--}}
+
+
+                <div  style="width: 100%" class="box-contents">
+                            <ul class="contestants-number">
+
+                                @if($contestants)
+
+                                    @foreach($contestants as $contestant)
+
+                                            <li class="contestants-number-items">{{$contestant->number}}</li>
+
+
+                                    @endforeach
+                                    @endif
+                            </ul>
+
+                            <ul class="contestants-name">
+                                @if($contestants)
+                                    @foreach($contestants as $contestant)
+
+
+                                        <li class="contestants-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>
+
+                                    @endforeach
+                                @endif
+
+                            </ul>
 
 
 
-                                {{--<div class="box">--}}
-                                {{--@if($scores)--}}
+                                <div class="box">
+                                @if($scores)
 
-                                {{--@foreach($scores as $score)--}}
+                                @foreach($scores as $score)
 
-                                    {{--<p style="order: {{$score->contestant_id}}"  class=" score-flex">{{$score->score}}</p>--}}
+                                    <p style="order: {{$score->contestant_id}}"  class=" score-flex">{{$score->score}}</p>
 
-                                    {{--@endforeach--}}
+                                    @endforeach
 
-                                    {{--@endif--}}
-                                {{--</div>--}}
+                                    @endif
+                                </div>
 
                     {{--<ul>--}}
                         {{--@if($final_scores)--}}
@@ -293,7 +299,7 @@
                             {{--@endif--}}
                     {{--</ul>--}}
 
-                {{--</div>--}}
+                </div>
 
 
 

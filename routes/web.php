@@ -67,10 +67,12 @@ Route::group(['middleware'=>'admin'],function (){
 
     Route::get('admin/total/score/{event_id}','ScoreController@showTotalScore')->name('admin.total.score');
     Route::get('admin/total/score/final/{event_id}','ScoreController@showTotalScoreFinal')->name('admin.total.score.final');
+    Route::get('admin/total/score/awards/{event_id}','ScoreController@showTotalScoreAwards')->name('admin.total.score.awards');
 
     Route::get('admin/tally/score/{event_id}','ScoreController@computeFinalScore')->name('admin.tally.total.score');
 
     Route::get('admin/tally/score/final/{event_id}','ScoreController@computeFinalScoreFinal')->name('admin.tally.total.score.final');
+    Route::get('admin/tally/score/awards/{event_id}','ScoreController@computeAwards')->name('admin.tally.total.awards');
 
 
 

@@ -197,10 +197,13 @@
                             @endforeach
                         @endif
                         <li><a href="{{route('admin.total.score.final',['event_id'=>$event->id])}}">Show Total Score</a></li>
+                            <li><a href="{{route('admin.total.score.awards',['event_id'=>$event->id])}}">Show Awards Score</a></li>
                     </ul>
 
 
                     <a href="{{route('admin.tally.total.score.final',['event_id'=>$event->id])}}">Tally Up Contestant Scores?</a>
+                    <br>
+                    <a href="{{route('admin.tally.total.awards',['event_id'=>$event->id])}}">Tally Up Awards Scores?</a>
 
 
 

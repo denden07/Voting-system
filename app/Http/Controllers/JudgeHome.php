@@ -304,6 +304,7 @@ class JudgeHome extends Controller
 
     public function computeScore(Request $request,$event_id){
           $contestants = Contestant::where('event_id',$event_id)->where('sex_id',2)->get();
+
         $user =Auth::user();
 
         foreach ($contestants as $contestant){
@@ -334,6 +335,7 @@ class JudgeHome extends Controller
 
             Computed::create($data2);
         }
+
 
 
         return back()->with('success','Score is passed');
