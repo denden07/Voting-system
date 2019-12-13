@@ -160,6 +160,7 @@ class ScoreController extends Controller
         $productionNOs2 = Award::where('criteria_id',$criteriaSelector->id)->where('sex_id',1)->where('round_id',1)->where('event_id',$event_id)->get();
 
 
+
         return view('admin.score.awards',compact('event','criterias','criterias2','contestants','finalScores','finalScores2','productionNOs','productionNOs2','criteriaSelector'));
     }
 
@@ -174,10 +175,13 @@ class ScoreController extends Controller
 
         $contestants = Contestant::where('event_id',$event_id)->get();
 
-        $finalScores =FinalScore::where('event_id',$event_id)->where('round_id',2)->get();
+        $finalScores =FinalScore::where('event_id',$event_id)->where('sex_id',2)->where('round_id',2)->get();
+
+        $finalScores2 =FinalScore::where('event_id',$event_id)->where('sex_id',1)->where('round_id',2)->get();
 
 
-        return view('admin.score.total-score-final',compact('event','criterias','criterias2','contestants','finalScores'));
+
+        return view('admin.score.total-score-final',compact('event','criterias','criterias2','contestants','finalScores','finalScores2'));
     }
 
 

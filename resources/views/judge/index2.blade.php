@@ -162,6 +162,7 @@
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1>{{$event->name}}</h1>
+
                         <h3>Contestant Score</h3>
                     </div>
 
@@ -304,10 +305,25 @@
 
                         {{--</div>--}}
 
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger" role="alert">
+                                    {{$error}}
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if(session('success'))
+
+                            <div class="alert alert-success" role="alert">
+                                {{session('success','Please Proceed to next Criteria')}}
+                            </div>
+                        @endif
+
 
     <div style="width: 100%">
                         <div style="padding: 50px" class="col-lg-6 ">
-
+                            <h2>WOMEN</h2>
 
                             <table style="width: 100%">
 
@@ -316,13 +332,13 @@
                                     <th width="50%">Name</th>
                                     <th width="25%">Score</th>
                                 </tr>
-                                {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm']) !!}
+                                {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()']) !!}
 
                                 @foreach($contestants as $contestant )
                                 <tr>
                                     <td width="50%">{{$contestant->number}}</td>
                                     <td width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
-                                    <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]"></td>
+                                    <td width="25%"> <input id="scoreW" style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]"></td>
                                     <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
 
                                 </tr>
@@ -333,7 +349,7 @@
                         </div>
 
                         <div style="padding: 50px" class="col-lg-6 ">
-
+    <h2>MEN</h2>
 
                             <table style="width: 100%">
 
@@ -347,7 +363,7 @@
                                     <tr>
                                         <td width="25%">{{$contestant2->number}}</td>
                                         <td width="25%">{{$contestant2 ->firstname." ".$contestant2 ->lastname}}</td>
-                                        <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score2[]"></td>
+                                        <td width="25%"> <input id="scoreM" style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]"></td>
                                         <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2->id}}">
 
                                     </tr>
@@ -682,6 +698,21 @@
         $(".loader-wrapper").fadeOut(2000);
     });
 </script>
+
+    <script>
+
+        function checkForBlank() {
+
+            if(document.getElementById('scoreW').value== "" || document.getElementById('scoreM').value== ""){
+               alert('Oops! You missed a score there!');
+               document.getElementById('scoreW').style.borderColor= red;
+                return false;
+            }
+
+        }
+
+    </script>
+
 
 
 

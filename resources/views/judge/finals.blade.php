@@ -241,7 +241,7 @@
 
 
                                 <table style="width: 100%">
-
+                                    <h2>MEN</h2>
                                     <tr>
                                         <th width="50%" style="margin-right: 2px">Contestant #</th>
                                         <th width="50%">Name</th>
@@ -253,7 +253,7 @@
                                         <tr>
                                             <td width="50%">{{$contestant->contestant->number}}</td>
                                             <td width="50%">{{$contestant ->contestant ->firstname." ".$contestant ->contestant ->lastname}}</td>
-                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score[]"></td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]"></td>
                                             <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant ->contestant->id}}">
 
                                         </tr>
@@ -267,7 +267,7 @@
 
 
                                 <table style="width: 100%">
-
+                                    <h2>MEN</h2>
                                     <tr>
                                         <th width="25%">Contestant #</th>
                                         <th width="25%">Name</th>
@@ -278,7 +278,7 @@
                                         <tr>
                                             <td width="25%">{{$contestant2->contestant->number}}</td>
                                             <td width="25%">{{$contestant2 ->contestant ->firstname." ".$contestant2 ->contestant ->lastname}}</td>
-                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" name="score2[]"></td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]"></td>
                                             <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2 ->contestant->id}}">
 
                                         </tr>

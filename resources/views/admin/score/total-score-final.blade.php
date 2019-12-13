@@ -10,6 +10,11 @@
     <!-- Favicons -->
     <link href="{{asset('ui/img/favicon.png')}}" rel="icon">
     <link href="{{asset('ui/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    {{--for data table--}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('ui/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -155,40 +160,51 @@
                     </div>
 
 
-                    <table class="final-heading">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
                         <tr>
-                            <th class="final-heading-items">Contestant Number</th>
-                            <th class="final-heading-items">Contestant Name</th>
-                            <th class="final-heading-items">Total Score</th>
+                            <th>Contestant #</th>
+                            <th>Name</th>
+                            <th>Score</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($finalScores as $finalScore )
+                            <tr>
+
+                                <td>{{$finalScore->contestant->number}}</td>
+                                <td>{{$finalScore->contestant->firstname ." ". $finalScore->contestant->lastname}}</td>
+                                <td>{{$finalScore->finalScore}}</td>
+
+                            </tr>
+
+                        @endforeach
                     </table>
 
-                    <div class="total-score">
-                        <ul class="final-contestant-number">
-                            @if($contestants)
-                                @foreach($contestants as $contestant)
-                                    <li class="final-contestant-number-items">{{$contestant->number}}</li>
-                                @endforeach
-                            @endif
 
-                        </ul>
+                    <p>Male</p>
+                    <table id="example2" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Contestant #</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($finalScores2 as $finalScore2 )
+                            <tr>
 
-                        <ul class="final-contestant-name">
-                            @if($contestants)
-                                @foreach($contestants as $contestant)
-                                    <li class="final-contestant-name-items">{{$contestant->firstname ." ". $contestant->lastname}}</li>
-                                @endforeach
-                            @endif
-                        </ul>
+                                <td>{{$finalScore2->contestant->number}}</td>
+                                <td>{{$finalScore2->contestant->firstname ." ". $finalScore2->contestant->lastname}}</td>
+                                <td>{{$finalScore2->finalScore}}</td>
 
-                        <ul class="final-contestant-score">
-                            @if($finalScores)
-                                @foreach($finalScores as $finalScore)
-                                    <li class="final-contestant-score-items">{{$finalScore->finalScore}}</li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
+                            </tr>
+
+                        @endforeach
+                    </table>
+                    <br>
+                    <br>
                 </div>
                 <!-- /col-lg-9 END SECTION MIDDLE -->
                 <!-- **********************************************************************************************************************************************************
@@ -455,6 +471,44 @@
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            } );
+        } );
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example2').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            } );
+        } );
     </script>
 
 @endsection

@@ -12,6 +12,7 @@ use App\Judge;
 use App\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class JudgeHome extends Controller
 {
@@ -128,19 +129,23 @@ class JudgeHome extends Controller
 
     public function inputScore(Request $request,$event_id,$criteria_selector){
 
-
-
-        $event = Event::where('id',$event_id)->first();
         $user =Auth::user();
+        if (Score::where('criteria_id', $criteria_selector)->where('event_id',$event_id)->where('judge_id',$user->id)->exists()) {
+            return back()->withErrors('Duplicate Score');
 
-        $input = $request->all();
-        $count = count($request->input('score'));
+        }else{
 
-        $criteria = Criteria::where('id',$criteria_selector)->first();
-        $criteriaDevider =$criteria->percentage;
+            $event = Event::where('id',$event_id)->first();
+
+
+            $input = $request->all();
+            $count = count($request->input('score'));
+
+            $criteria = Criteria::where('id',$criteria_selector)->first();
+            $criteriaDevider =$criteria->percentage;
 
 //for women
-        for($i=0; $i<= $count; $i++) {
+            for($i=0; $i<= $count; $i++) {
 
 //           $score=  new Score();
 //
@@ -152,28 +157,28 @@ class JudgeHome extends Controller
 //            $score->save();
 
 
-            if(empty($input['score'][$i]) || !is_numeric($input['score'][$i])) continue;
+                if(empty($input['score'][$i]) || !is_numeric($input['score'][$i])) continue;
 
-            $data = [
-                'contestant_id' => $input['contestant_id'][$i],
-                'score' => ($input['score'][$i]*$criteriaDevider)/100, // see above for why this might be a bad idea
-                'judge_id' => $user->id,
-                'criteria_id'=> $criteria->id,
-                'event_id'=> $event->id,
-                'sex_id'=>2,
-                'round_id'=>1,
-            ];
+                $data = [
+                    'contestant_id' => $input['contestant_id'][$i],
+                    'score' => ($input['score'][$i]*$criteriaDevider)/100, // see above for why this might be a bad idea
+                    'judge_id' => $user->id,
+                    'criteria_id'=> $criteria->id,
+                    'event_id'=> $event->id,
+                    'sex_id'=>2,
+                    'round_id'=>1,
+                ];
 
-            Score::create($data);
+                Score::create($data);
 
 
-        }
+            }
 
 
 
 //        for men
-        $count2 = count($request->input('score2'));
-        for($i=0; $i<= $count2; $i++) {
+            $count2 = count($request->input('score2'));
+            for($i=0; $i<= $count2; $i++) {
 
 //            $score2=  new Score();
 //
@@ -185,28 +190,37 @@ class JudgeHome extends Controller
 //            $score2->save();
 
 
-            if(empty($input['score2'][$i]) || !is_numeric($input['score'][$i])) continue;
+                if(empty($input['score2'][$i]) || !is_numeric($input['score'][$i])) continue;
 
-            $data2 = [
-                'contestant_id' => $input['contestant_id2'][$i],
-                'score' => ($input['score2'][$i]*$criteriaDevider)/100, // see above for why this might be a bad idea
-                'judge_id' => $user->id,
-                'criteria_id'=> $criteria->id,
-                'event_id'=> $event->id,
-                'sex_id'=>1,
-                'round_id'=>1,
-            ];
+                $data2 = [
+                    'contestant_id' => $input['contestant_id2'][$i],
+                    'score' => ($input['score2'][$i]*$criteriaDevider)/100, // see above for why this might be a bad idea
+                    'judge_id' => $user->id,
+                    'criteria_id'=> $criteria->id,
+                    'event_id'=> $event->id,
+                    'sex_id'=>1,
+                    'round_id'=>1,
+                ];
 
-            Score::create($data2);
+                Score::create($data2);
+
+
+            }
+
+
+
+
+
+            return back()->withSuccess('success','Please Proceed to next Criteria');
+
+
+
+
 
 
         }
 
 
-
-
-
-        return back()->with('success','Score is passed');
 
 
 

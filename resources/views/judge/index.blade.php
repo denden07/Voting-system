@@ -113,12 +113,13 @@
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1 style="text-align: center;font-size: 4.2em">{{$event->name}}</h1>
+                        <img style="width: 20%;margin-left: 40%" src="icon.png" alt="">
                         <h2 style="text-align:center;margin-top: 1em; ">Welcome {{$user->judge->firstname ." ".$user->judge->lastname }}</h2>
                     </div>
 
 
 
-                    <p style="text-align:center;margin-top: 20%;font-size:2em;margin-bottom: 20%">Vote Honestly and enjoy the night!</p>
+                    <p style="text-align:center;margin-top: 10%;font-size:2em;margin-bottom: 10%">Vote Honestly and enjoy the night!</p>
 
 
                     <p style="text-align: center">click here to start voting</p>
