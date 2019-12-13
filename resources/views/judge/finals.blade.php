@@ -235,6 +235,23 @@
                         </ul>
                         <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
 
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger" role="alert">
+                                    {{$error}}
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if(session('success'))
+
+                            <div class="alert alert-success" role="alert">
+                                {{session('success','Please Proceed to next Criteria')}}
+                            </div>
+                        @endif
+
+
+
 
                         <div style="width: 100%">
                             <div style="padding: 50px" class="col-lg-6 ">
@@ -253,7 +270,7 @@
                                         <tr>
                                             <td width="50%">{{$contestant->contestant->number}}</td>
                                             <td width="50%">{{$contestant ->contestant ->firstname." ".$contestant ->contestant ->lastname}}</td>
-                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]"></td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]" value="0"></td>
                                             <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant ->contestant->id}}">
 
                                         </tr>
@@ -278,7 +295,7 @@
                                         <tr>
                                             <td width="25%">{{$contestant2->contestant->number}}</td>
                                             <td width="25%">{{$contestant2 ->contestant ->firstname." ".$contestant2 ->contestant ->lastname}}</td>
-                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]"></td>
+                                            <td width="25%"> <input style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]" value="0"></td>
                                             <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2 ->contestant->id}}">
 
                                         </tr>

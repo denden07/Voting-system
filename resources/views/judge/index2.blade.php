@@ -338,7 +338,7 @@
                                 <tr>
                                     <td width="50%">{{$contestant->number}}</td>
                                     <td width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
-                                    <td width="25%"> <input id="scoreW" style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]"></td>
+                                    <td width="25%"> <input id="scoreW" style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]" value="0"></td>
                                     <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
 
                                 </tr>
@@ -363,7 +363,7 @@
                                     <tr>
                                         <td width="25%">{{$contestant2->number}}</td>
                                         <td width="25%">{{$contestant2 ->firstname." ".$contestant2 ->lastname}}</td>
-                                        <td width="25%"> <input id="scoreM" style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]"></td>
+                                        <td width="25%"> <input id="scoreM" style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]" value="0"></td>
                                         <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2->id}}">
 
                                     </tr>
