@@ -233,7 +233,7 @@ class JudgeHome extends Controller
         $user =Auth::user();
 
         if (Score::where('criteria_id', $criteria_selector)->where('event_id',$event_id)->where('judge_id',$user->id)->where('round_id',2)->exists()) {
-            return back()->withErrors('Duplicate Score');
+            return back()->withErrors('Score is already passed');
 
         }else{
             $event = Event::where('id',$event_id)->first();
@@ -325,84 +325,94 @@ class JudgeHome extends Controller
 
 
     public function computeScore(Request $request,$event_id){
+
+
+
+
+
           $contestants = Contestant::where('event_id',$event_id)->where('sex_id',2)->get();
 
         $user =Auth::user();
 
-        foreach ($contestants as $contestant){
-            $score = Score::where('contestant_id',$contestant->id)->where('sex_id',2)->where('judge_id',$user->id)->where('event_id',$event_id)->sum('score');
-           $data = [
-               'contestant_id' =>$contestant->id,
-                'score' => $score,
-               'round_id' => 1,
-               'judge_id' => $user->id,
-               'event_id' => $event_id,
-               'sex_id'=>2,
-           ];
 
-           Computed::create($data);
+        if(Computed::where('round_id',1)->where('judge_id',$user->id)->where('event_id',$event_id)->where('sex_id',2)->exists()){
+            return back()->withErrors('Score is already passed');
+        }else{
+
+            foreach ($contestants as $contestant){
+                $score = Score::where('round_id',1)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('judge_id',$user->id)->where('event_id',$event_id)->sum('score');
+                $data = [
+                    'contestant_id' =>$contestant->id,
+                    'score' => $score,
+                    'round_id' => 1,
+                    'judge_id' => $user->id,
+                    'event_id' => $event_id,
+                    'sex_id'=>2,
+                ];
+
+                Computed::create($data);
+            }
+
+            $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
+            foreach ($contestants2 as $contestant2){
+                $score2 = Score::where('round_id',1)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('judge_id',$user->id)->where('event_id',$event_id)->sum('score');
+                $data2 = [
+                    'contestant_id' =>$contestant2->id,
+                    'score' => $score2,
+                    'round_id' => 1,
+                    'judge_id' => $user->id,
+                    'event_id' => $event_id,
+                    'sex_id'=>1,
+                ];
+
+                Computed::create($data2);
+            }
+
+
+
+            return back()->with('success','Score is passed');
         }
-
-        $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
-        foreach ($contestants2 as $contestant2){
-            $score2 = Score::where('contestant_id',$contestant2->id)->where('sex_id',1)->where('judge_id',$user->id)->where('event_id',$event_id)->sum('score');
-            $data2 = [
-                'contestant_id' =>$contestant2->id,
-                'score' => $score2,
-                'round_id' => 1,
-                'judge_id' => $user->id,
-                'event_id' => $event_id,
-                'sex_id'=>1,
-            ];
-
-            Computed::create($data2);
-        }
-
-
-
-        return back()->with('success','Score is passed');
     }
 
-    public function computeScoreFinal(Request $request,$event_id){
-        $user =Auth::user();
-        $contestants = Contestant::where('event_id',$event_id)->where('sex_id',2)->get();
+        public function computeScoreFinal(Request $request,$event_id){
+            $user =Auth::user();
+            $contestants = Contestant::where('event_id',$event_id)->where('sex_id',2)->get();
 
 
-        foreach ($contestants as $contestant){
-            $score = Score::where('contestant_id',$contestant->id)->where('judge_id',$user->id)->where('event_id',$event_id)->where('round_id',2)->where('sex_id',2)->sum('score');
-            $data = [
-                'contestant_id' =>$contestant->id,
-                'score' => $score,
-                'round_id' => 2,
-                'judge_id' => $user->id,
-                'event_id' => $event_id,
-                'sex_id'=>2,
-            ];
+            foreach ($contestants as $contestant){
+                $score = Score::where('contestant_id',$contestant->id)->where('judge_id',$user->id)->where('event_id',$event_id)->where('round_id',2)->where('sex_id',2)->sum('score');
+                $data = [
+                    'contestant_id' =>$contestant->id,
+                    'score' => $score,
+                    'round_id' => 2,
+                    'judge_id' => $user->id,
+                    'event_id' => $event_id,
+                    'sex_id'=>2,
+                ];
 
-            Computed::create($data);
+                Computed::create($data);
+            }
+
+            $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
+
+
+            foreach ($contestants2 as $contestant2){
+                $score = Score::where('contestant_id',$contestant2->id)->where('judge_id',$user->id)->where('event_id',$event_id)->where('sex_id',1)->where('round_id',2)->sum('score');
+                $data2 = [
+                    'contestant_id' =>$contestant2->id,
+                    'score' => $score,
+                    'round_id' => 2,
+                    'judge_id' => $user->id,
+                    'event_id' => $event_id,
+                    'sex_id'=>1,
+                ];
+
+                Computed::create($data2);
+            }
+
+            return back()->with('success','Score is passed');
+
         }
-
-        $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
-
-
-        foreach ($contestants2 as $contestant2){
-            $score = Score::where('contestant_id',$contestant2->id)->where('judge_id',$user->id)->where('event_id',$event_id)->where('sex_id',1)->where('round_id',2)->sum('score');
-            $data2 = [
-                'contestant_id' =>$contestant2->id,
-                'score' => $score,
-                'round_id' => 2,
-                'judge_id' => $user->id,
-                'event_id' => $event_id,
-                'sex_id'=>1,
-            ];
-
-            Computed::create($data2);
-        }
-
-        return back()->with('success','Score is passed');
-    }
-
-
 
 
     /**
@@ -449,4 +459,11 @@ class JudgeHome extends Controller
     {
         //
     }
-}
+
+    }
+
+
+
+
+
+

@@ -501,6 +501,41 @@ class ScoreController extends Controller
         }
 
 
+        foreach ($contestants as $contestant)
+        {
+            $compute13 =  Score::where('criteria_id',13)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+
+            $data13 = [
+                'contestant_id' => $contestant->id,
+                'score'=>$compute13/$total_judge,
+                'event_id'=>$event_id,
+                'round_id' => 1,
+                'sex_id'=>2,
+                'criteria_id'=>13
+            ];
+
+            Award::create($data13);
+
+        }
+
+        foreach ($contestants2 as $contestant2)
+        {
+            $compute14  =  Score::where('criteria_id',13)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+
+            $data14 = [
+                'contestant_id' => $contestant2->id,
+                'score'=>$compute14/$total_judge,
+                'event_id'=>$event_id,
+                'round_id' => 1,
+                'sex_id'=>1,
+                'criteria_id'=>13
+            ];
+
+            Award::create($data14);
+
+        }
+
+
 
     }
 

@@ -6,6 +6,10 @@
 
 @section('css')
 
+    {{--googlefonts--}}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -26,9 +30,126 @@
     <link href="{{asset('ui/css/style-responsive.css')}}" rel="stylesheet">
     <script src="{{asset('ui/lib/chart-master/Chart.js')}}"></script>
     <style>
-        .selected{
-            background-color: #4ECDC4;
-            color:white;
+
+
+
+
+
+
+        .criteria-selector{
+            float:left;
+            width: 100%;
+            padding: 7px;
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#959595+0,0d0d0d+13,010101+36,0a0a0a+53,4e4e4e+76,383838+87,0d0d0d+91,0d0d0d+92,1b1b1b+100 */
+            background: rgb(149,149,149); /* Old browsers */
+            background: -moz-linear-gradient(-45deg,  rgba(149,149,149,1) 0%, rgba(13,13,13,1) 13%, rgba(1,1,1,1) 36%, rgba(10,10,10,1) 53%, rgba(78,78,78,1) 76%, rgba(56,56,56,1) 87%, rgba(13,13,13,1) 91%, rgba(13,13,13,1) 92%, rgba(27,27,27,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 13%,rgba(1,1,1,1) 36%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(13,13,13,1) 91%,rgba(13,13,13,1) 92%,rgba(27,27,27,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 13%,rgba(1,1,1,1) 36%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(13,13,13,1) 91%,rgba(13,13,13,1) 92%,rgba(27,27,27,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#959595', endColorstr='#1b1b1b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+            border: 2px solid #114466;
+            border-radius: 8px;
+
+
+        }
+
+        .criteria-menu{
+            float: left;
+            padding: 10px;
+
+            color: white;
+
+        }
+
+        .criteria-menu-2{
+            color: black;
+            float: right;
+            padding: 10px;
+            background-color: whitesmoke;
+        }
+
+        .criteria-menu-2 a{
+            color: black;
+        }
+
+        .criteria-menu:hover{
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#eeeeee+0,eeeeee+100;Grey+Flat */
+            background: rgb(238,238,238); /* Old browsers */
+            background: -moz-linear-gradient(-45deg,  rgba(238,238,238,1) 0%, rgba(238,238,238,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg,  rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg,  rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+            color: black;
+            transform: scale(1.2);
+        }
+
+        .criteria-menu-2:hover{
+            color: black;
+            transform: scale(1.2);
+        }
+
+
+
+        .voting-sheet{
+            z-index: 999;
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#383838+53,383838+53,383838+71,4e4e4e+94 */
+            background: #383838; /* Old browsers */
+            background: -moz-linear-gradient(top,  #383838 53%, #383838 53%, #383838 71%, #4e4e4e 94%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top,  #383838 53%,#383838 53%,#383838 71%,#4e4e4e 94%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom,  #383838 53%,#383838 53%,#383838 71%,#4e4e4e 94%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#383838', endColorstr='#4e4e4e',GradientType=0 ); /* IE6-9 */
+
+            padding: 500px;
+            border-radius: 19px 19px 19px 19px;
+            -moz-border-radius: 19px 19px 19px 19px;
+            -webkit-border-radius: 19px 19px 19px 19px;
+            border: 0px solid #000000;
+
+
+            -webkit-box-shadow: 16px 17px 0px -9px rgba(0,0,0,0.48);
+            box-shadow: 16px 17px 0px -9px rgba(0,0,0,0.48)
+        }
+
+        .contestant-info-1{
+            font-size: 1.2em;
+            color: whitesmoke;
+        }
+
+      .contestant-info-2{
+            font-family: Roboto;
+            font-size: 1.5em;
+          padding: 5px;
+          color: whitesmoke;
+
+        }
+      .contestant-number {
+          font-weight: bold;
+      }
+
+      .contestant-separator{
+
+          padding: 10px;
+      }
+
+      .contestant-separator:hover{
+          /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
+          background: rgb(242,245,246); /* Old browsers */
+          background: -moz-linear-gradient(top,  rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+
+          transform: scale(1.1);
+
+
+
+      }
+
+        .contestant-separator:hover td{
+           color: black;
+
+
         }
 
 
@@ -100,6 +221,34 @@
             }
         }
 
+
+
+
+        .selected{
+
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#eeeeee+0,eeeeee+100;Grey+Flat */
+            background: rgb(238,238,238); /* Old browsers */
+            background: -moz-linear-gradient(-45deg,  rgba(238,238,238,1) 0%, rgba(238,238,238,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg,  rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg,  rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+            color: black;
+
+
+        }
+
+
+        .event-name{
+            text-align: center;
+            font-family: Roboto Helvetica sans-serif;
+        }
+
+
+
+
+
+
     </style>
 
 @endsection
@@ -161,7 +310,7 @@
                 <div class="col-lg-10 main-chart">
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
-                        <h1>{{$event->name}}</h1>
+                        <h1 class="event-name">{{$event->name}}</h1>
 
                         <h3>Contestant Score</h3>
                     </div>
@@ -211,7 +360,8 @@
 
 
                     <div style="width: 100%">
-                        <ul class="nav nav-tabs">
+                        <ul class="criteria-selector" >
+                            {{--class="nav nav-tabs"--}}
 
 
 
@@ -224,15 +374,15 @@
                                         @php
                                         $selector ="selected"
                                         @endphp
-                                <li style="font-size: 14px" class="{{$selector}}"><a class="{{$selector}}  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                <li  class="{{$selector}} "><a class="{{$selector}} criteria-menu "  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
                                     @else
                                         @php
                                             $selector =""
                                         @endphp
-                                    <li style="font-size: 14px" class="{{$selector}}"><a class="{{$selector}}"  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
+                                    <li  class="{{$selector}}  "><a class="{{$selector}} criteria-menu"  href="{{route('judge.select.criteria',['criteria_id'=>$criteria->id])}}">{{$criteria->name}}</a></li>
                                     @endif
                             @endforeach
-                            <li style="background-color: #1b6d85"><a href="{{route('judge.score.compute',['event_id'=>$event->id])}}">Submit Score</a></li>
+                            <li class="criteria-menu-2" ><a onclick="return confirm('You are about to send the score to server?');" href="{{route('judge.score.compute',['event_id'=>$event->id])}}">Submit Score</a></li>
                         </ul>
                         <h2 style="margin-left: 300px">Score for {{$criteriaSelector->name}}</h2>
 
@@ -322,23 +472,24 @@
 
 
     <div style="width: 100%">
-                        <div style="padding: 50px" class="col-lg-6 ">
-                            <h2>WOMEN</h2>
+                        <div class="voting-sheet col-lg-10 col-lg-offset-1" style="padding: 50px" >
+                            {{--<h2>WOMEN</h2>--}}
 
-                            <table style="width: 100%">
+                            <table  style="width: 100%">
 
                                 <tr>
-                                    <th width="50%" style="margin-right: 2px">Contestant #</th>
-                                    <th width="50%">Name</th>
-                                    <th width="25%">Score</th>
+                                    <th class="contestant-info-1" width="50%" style="margin-right: 2px">Contestant #</th>
+                                    <th class="contestant-info-1" width="50%">Name</th>
+                                    <th class="contestant-info-1" width="25%">Score</th>
                                 </tr>
                                 {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()']) !!}
 
                                 @foreach($contestants as $contestant )
-                                <tr>
-                                    <td width="50%">{{$contestant->number}}</td>
-                                    <td width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
-                                    <td width="25%"> <input id="scoreW" style="width: 100px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score[]" value="0"></td>
+
+                                <tr class="contestant-separator ">
+                                    <td class="contestant-info-2 contestant-number" width="25%">{{$contestant->number}}</td>
+                                    <td class="contestant-info-2" width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
+                                    <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 100px;margin-top: 24px;margin-left: 2%" type="number" class="form-control input" min="75" max="100" name="score[]" value="0"></td>
                                     <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
 
                                 </tr>
@@ -348,30 +499,36 @@
 
                         </div>
 
-                        <div style="padding: 50px" class="col-lg-6 ">
-    <h2>MEN</h2>
 
-                            <table style="width: 100%">
+        {{--Uncomment if there is a men category--}}
 
-                                <tr>
-                                    <th width="25%">Contestant #</th>
-                                    <th width="25%">Name</th>
-                                    <th width="25%">Score</th>
-                                </tr>
+                        {{--<div style="padding: 50px" class="col-lg-6 ">--}}
+    {{--<h2>MEN</h2>--}}
 
-                                @foreach($contestants2 as $contestant2 )
-                                    <tr>
-                                        <td width="25%">{{$contestant2->number}}</td>
-                                        <td width="25%">{{$contestant2 ->firstname." ".$contestant2 ->lastname}}</td>
-                                        <td width="25%"> <input id="scoreM" style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]" value="0"></td>
-                                        <input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2->id}}">
+                            {{--<table style="width: 100%">--}}
 
-                                    </tr>
-                                @endforeach
-                            </table>
+                                {{--<tr>--}}
+                                    {{--<th width="25%">Contestant #</th>--}}
+                                    {{--<th width="25%">Name</th>--}}
+                                    {{--<th width="25%">Score</th>--}}
+                                {{--</tr>--}}
+
+                                {{--@foreach($contestants2 as $contestant2 )--}}
+                                    {{--<tr>--}}
+                                        {{--<td width="25%">{{$contestant2->number}}</td>--}}
+                                        {{--<td width="25%">{{$contestant2 ->firstname." ".$contestant2 ->lastname}}</td>--}}
+                                        {{--<td width="25%"> <input id="scoreM" style="width: 100px;margin-top: 24px" type="number" min="75" max="100" class="form-control input" name="score2[]" value="0"></td>--}}
+                                        {{--<input style="display: none" name="contestant_id2[]" type="text" value="{{$contestant2->id}}">--}}
+
+                                    {{--</tr>--}}
+                                {{--@endforeach--}}
+                            {{--</table>--}}
 
 
-                        </div>
+                        {{--</div>--}}
+
+
+
 
                         <div class="form-group">
                         <div style="margin-top: 6%" class="col-lg-offset-4 col-lg-10">
@@ -631,26 +788,26 @@
     <!--script for this page-->
     <script src="{{asset('ui/lib/sparkline-chart.js')}}"></script>
     <script src="{{asset('ui/lib/zabuto_calendar.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var unique_id = $.gritter.add({
-                // (string | mandatory) the heading of the notification
-                title: 'Welcome to Dashio!',
-                // (string | mandatory) the text inside the notification
-                text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
-                // (string | optional) the image to display on the left
-                image: 'img/ui-sam.jpg',
-                // (bool | optional) if you want it to fade out on its own or just sit there
-                sticky: false,
-                // (int | optional) the time you want it to be alive for before fading out
-                time: 8000,
-                // (string | optional) the class name you want to apply to that specific message
-                class_name: 'my-sticky-class'
-            });
+    {{--<script type="text/javascript">--}}
+        {{--$(document).ready(function() {--}}
+            {{--var unique_id = $.gritter.add({--}}
+                {{--// (string | mandatory) the heading of the notification--}}
+                {{--title: 'Welcome to Dashio!',--}}
+                {{--// (string | mandatory) the text inside the notification--}}
+                {{--text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',--}}
+                {{--// (string | optional) the image to display on the left--}}
+                {{--image: 'img/ui-sam.jpg',--}}
+                {{--// (bool | optional) if you want it to fade out on its own or just sit there--}}
+                {{--sticky: false,--}}
+                {{--// (int | optional) the time you want it to be alive for before fading out--}}
+                {{--time: 8000,--}}
+                {{--// (string | optional) the class name you want to apply to that specific message--}}
+                {{--class_name: 'my-sticky-class'--}}
+            {{--});--}}
 
-            return false;
-        });
-    </script>
+            {{--return false;--}}
+        {{--});--}}
+    {{--</script>--}}
     <script type="application/javascript">
         $(document).ready(function() {
             $("#date-popover").popover({

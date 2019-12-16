@@ -258,7 +258,7 @@
 
 
                                 <table style="width: 100%">
-                                    <h2>MEN</h2>
+                                    <h2>WOMEN</h2>
                                     <tr>
                                         <th width="50%" style="margin-right: 2px">Contestant #</th>
                                         <th width="50%">Name</th>
