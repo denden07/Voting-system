@@ -31,6 +31,13 @@
     <script src="{{asset('ui/lib/chart-master/Chart.js')}}"></script>
     <style>
 
+        .input:focus{
+            border:  green solid 10px;
+            padding: 30px 12px;
+            transition: 1s;
+            font-size: 1.2em;
+        }
+
 
 
 
@@ -82,11 +89,13 @@
 
             color: black;
             transform: scale(1.2);
+            transition: 1s;
         }
 
         .criteria-menu-2:hover{
             color: black;
             transform: scale(1.2);
+            transition: 1s;
         }
 
 
@@ -286,8 +295,8 @@
                         <i style="margin-left: 30%" class="fas fa-arrow-down"></i>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{route('judge.select.criteria',['criteria_id'=>9])}}">Preliminary</a></li>
-                        <li><a href="{{route('judge.select.criteria.final',['criteria_id'=>15])}}">Finals</a></li>
+                        <li><a href="{{route('judge.select.criteria',['criteria_id'=>17])}}">Preliminary</a></li>
+                        <li><a href="{{route('judge.select.criteria.final',['criteria_id'=>24])}}">Finals</a></li>
                     </ul>
                 </li>
 
@@ -466,12 +475,96 @@
                         @if(session('success'))
 
                             <div class="alert alert-success" role="alert">
-                                {{session('success','Please Proceed to next Criteria')}}
+                                {{session('Success!','Success! Please Proceed to next Criteria')}}
                             </div>
                         @endif
 
 
+
+
+
+
+
+
+
+
     <div style="width: 100%">
+        {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()','autocomplete'=>'off']) !!}
+
+        @if($criteriaSelector == $gown )
+            <div>
+        <div class="voting-sheet col-lg-8" style="padding: 50px" >
+            {{--<h2>WOMEN</h2>--}}
+
+            <table  style="width: 100%">
+
+                <tr>
+                    <th class="contestant-info-1" width="50%" style="margin-right: 2px">Contestant #</th>
+                    <th class="contestant-info-1" width="50%">Barangay</th>
+                    <th class="contestant-info-1" width="25%">Score</th>
+                </tr>
+
+                @foreach($contestants as $contestant )
+
+                    <tr class="contestant-separator ">
+                        <td class="contestant-info-2 contestant-number" width="25%">{{$contestant->number}}</td>
+                        <td class="contestant-info-2" width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
+                        <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 100px;margin-top: 24px;margin-left: 2%" type="number" class="form-control input" min="75" max="100" name="score[]" required></td>
+                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+
+                    </tr>
+                @endforeach
+
+
+            </table>
+
+
+        </div>
+
+            <div class="voting-sheet col-lg-2 " style="padding: 50px" >
+                <table>
+                    <tr>
+
+                        <th class="contestant-info-1" width="50%"><p style="display: inline;margin-left: 2% ">Beauty</p></th>
+                    </tr>
+                @foreach($contestants as $contestant )
+
+                    <tr class="contestant-separator ">
+
+                        <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 80px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score3[]" required></td>
+                        <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+
+                    </tr>
+                @endforeach
+                </table>
+            </div>
+
+
+                <div class="voting-sheet col-lg-2 " style="padding: 50px" >
+                    <table>
+                        <tr>
+
+                            <th class="contestant-info-1" width="50%"><p style="display: inline;margin-left: 2% ">Poise</p></th>
+                        </tr>
+                        @foreach($contestants as $contestant )
+
+                            <tr class="contestant-separator ">
+
+                                <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 80px;margin-top: 24px" type="number" class="form-control input" min="75" max="100" name="score4[]" required></td>
+                                <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+
+
+            </div>
+
+
+@else
+
+
                         <div class="voting-sheet col-lg-10 col-lg-offset-1" style="padding: 50px" >
                             {{--<h2>WOMEN</h2>--}}
 
@@ -482,14 +575,13 @@
                                     <th class="contestant-info-1" width="50%">Name</th>
                                     <th class="contestant-info-1" width="25%">Score</th>
                                 </tr>
-                                {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()']) !!}
 
                                 @foreach($contestants as $contestant )
 
                                 <tr class="contestant-separator ">
                                     <td class="contestant-info-2 contestant-number" width="25%">{{$contestant->number}}</td>
                                     <td class="contestant-info-2" width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
-                                    <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 100px;margin-top: 24px;margin-left: 2%" type="number" class="form-control input" min="75" max="100" name="score[]" value="0"></td>
+                                    <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 100px;margin-top: 24px;margin-left: 2%" type="number" class="form-control input" min="75" max="100" name="score[]" required></td>
                                     <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
 
                                 </tr>
@@ -498,7 +590,7 @@
 
 
                         </div>
-
+@endif
 
         {{--Uncomment if there is a men category--}}
 

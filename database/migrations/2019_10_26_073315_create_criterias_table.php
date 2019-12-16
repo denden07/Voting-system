@@ -20,6 +20,7 @@ class CreateCriteriasTable extends Migration
             $table->integer('category');
             $table->integer('event_id');
             $table->integer('round_id');
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }

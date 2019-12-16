@@ -52,6 +52,7 @@ class CriteriaController extends Controller
         $criteria->category = $request->category;
         $criteria->round_id = $request->round_id;
         $criteria->event_id = $event_id;
+        $criteria->type = $request->type;
         $criteria->save();
 
         return back()->with('success','Contestant is registered');

@@ -152,6 +152,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group ">
+                                <label for="type" class="control-label col-lg-2">Type</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" name="type">
+                                        <option value="1">Main</option>
+                                        <option value="2">Sub</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
 
                             <div class="form-group">

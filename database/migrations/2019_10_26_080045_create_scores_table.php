@@ -19,6 +19,7 @@ class CreateScoresTable extends Migration
             $table->integer('criteria_id');
             $table->decimal('score');
             $table->integer('judge_id');
+            $table->integer('type');
             $table->timestamps();
         });
     }

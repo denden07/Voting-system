@@ -16,13 +16,13 @@ class CreateContestantsTable extends Migration
         Schema::create('contestants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstname');
-            $table->string('middlename');
-            $table->string('lastname');
-            $table->integer('age');
+            $table->string('middlename')->nullable();
+            $table->string('lastname')->nullable();
+            $table->integer('age')->nullable();
             $table->integer('sex_id');
             $table->integer('number');
-            $table->string('contactNumber');
-            $table->string('address');
+            $table->string('contactNumber')->nullable();
+            $table->string('address')->nullable();
             $table->integer('photo_id');
             $table->integer('event_id');
             $table->timestamps();
