@@ -489,7 +489,7 @@
 
 
                         <div style="width: 100%">
-                            {!! Form::open(['method'=>'POST','route'=>['judge.score.save',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()','autocomplete'=>'off']) !!}
+                            {!! Form::open(['method'=>'POST','route'=>['judge.score.save.final',$event->id,$criteriaSelector->id],'files'=>true,'class'=>'cmxform form-horizontal style-form','id'=>'signupForm','onsubmit'=>'checkForBlank()','autocomplete'=>'off']) !!}
 
 
                                 <div class="voting-sheet col-lg-9 " style="padding: 50px" >
@@ -506,10 +506,10 @@
                                         @foreach($contestants as $contestant )
 
                                             <tr class="contestant-separator ">
-                                                <td class="contestant-info-2 contestant-number" width="25%">{{$contestant->number}}</td>
-                                                <td class="contestant-info-2" width="50%">{{$contestant ->firstname." ".$contestant ->lastname}}</td>
+                                                <td class="contestant-info-2 contestant-number" width="25%">{{$contestant->contestant->number}}</td>
+                                                <td class="contestant-info-2" width="50%">{{$contestant ->contestant->firstname." ".$contestant ->contestant->astname}}</td>
                                                 <td class="contestant-info-2" width="50%" > <input id="scoreW" style="width: 100px;margin-top: 24px;margin-left: 2%" type="number" class="form-control input" min="75" max="100" name="score[]" required></td>
-                                                <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->id}}">
+                                                <input style="display: none" name="contestant_id[]" type="text" value="{{$contestant->contestant->id}}">
 
                                             </tr>
                                         @endforeach

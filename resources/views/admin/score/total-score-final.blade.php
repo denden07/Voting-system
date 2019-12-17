@@ -156,7 +156,7 @@
                     <!--CUSTOM CHART START -->
                     <div class="border-head">
                         <h1>{{$event->name}}</h1>
-                        <h3>Total Score For Round 1</h3>
+                        <h3>Total Score For Final Round</h3>
                     </div>
 
 

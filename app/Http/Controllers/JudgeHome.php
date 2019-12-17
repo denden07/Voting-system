@@ -88,8 +88,8 @@ class JudgeHome extends Controller
         $criterias2 =Criteria::where('event_id',$judge->event_id)->where('round_id',2)->get();
 
 
-        $contestants = FinalScore::where('event_id',$judge->event_id)->where('sex_id',2)->where('round_id',1)->orderBy('finalScore','DESC')->take(3)->get();
-        $contestants2 = FinalScore::where('event_id',$judge->event_id)->where('sex_id',1)->where('round_id',1)->orderBy('finalScore','DESC')->take(3)->get();
+        $contestants = FinalScore::where('event_id',$judge->event_id)->where('sex_id',2)->where('round_id',1)->orderBy('finalScore','DESC')->take(10)->get();
+//        $contestants2 = FinalScore::where('event_id',$judge->event_id)->where('sex_id',1)->where('round_id',1)->orderBy('finalScore','DESC')->take(3)->get();
 
 
         $event = Event::findOrFail($event_id);
@@ -98,7 +98,7 @@ class JudgeHome extends Controller
 
 
 
-        return view('judge.finals',compact('user','judge','criterias','criterias2','event','contestants','criteriaSelector','contestants2'));
+        return view('judge.finals',compact('user','judge','criterias','criterias2','event','contestants','criteriaSelector'));
 
     }
 

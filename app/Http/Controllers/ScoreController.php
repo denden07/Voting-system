@@ -303,22 +303,22 @@ class ScoreController extends Controller
 
         }
 
-        $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
-        foreach ($contestants2 as $contestant2)
-        {
-            $compute2 =  Computed::where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',2)->sum('score');
+//        $contestants2 = Contestant::where('event_id',$event_id)->where('sex_id',1)->get();
+//        foreach ($contestants2 as $contestant2)
+//        {
+//            $compute2 =  Computed::where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',2)->sum('score');
+//
+//            $data2 = [
+//                'contestant_id' => $contestant2->id,
+//                'finalScore' =>$compute2/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 2,
+//                'sex_id'=>1,
+//            ];
+//
+//            FinalScore::create($data2);
 
-            $data2 = [
-                'contestant_id' => $contestant2->id,
-                'finalScore' =>$compute2/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 2,
-                'sex_id'=>1,
-            ];
-
-            FinalScore::create($data2);
-
-        }
+//        }
 
 
     }
@@ -331,7 +331,7 @@ class ScoreController extends Controller
 
         foreach ($contestants as $contestant)
         {
-            $compute3 =  Score::where('criteria_id',9)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+            $compute3 =  Score::where('criteria_id',17)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data3 = [
                 'contestant_id' => $contestant->id,
@@ -339,24 +339,24 @@ class ScoreController extends Controller
                 'event_id'=>$event_id,
                 'round_id' => 1,
                 'sex_id'=>2,
-                'criteria_id'=>9
+                'criteria_id'=>17
             ];
 
             Award::create($data3);
 
         }
 
-        foreach ($contestants2 as $contestant2)
+        foreach ($contestants as $contestant)
         {
-            $compute4 =  Score::where('criteria_id',9)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+            $compute4 =  Score::where('criteria_id',18)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data4 = [
-                'contestant_id' => $contestant2->id,
+                'contestant_id' => $contestant->id,
                 'score'=>$compute4/$total_judge,
                 'event_id'=>$event_id,
                 'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>9
+                'sex_id'=>2,
+                'criteria_id'=>18
             ];
 
             Award::create($data4);
@@ -366,7 +366,7 @@ class ScoreController extends Controller
 
         foreach ($contestants as $contestant)
         {
-            $compute5 =  Score::where('criteria_id',10)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+            $compute5 =  Score::where('criteria_id',19)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data5 = [
                 'contestant_id' => $contestant->id,
@@ -374,24 +374,24 @@ class ScoreController extends Controller
                 'event_id'=>$event_id,
                 'round_id' => 1,
                 'sex_id'=>2,
-                'criteria_id'=>10
+                'criteria_id'=>19
             ];
 
             Award::create($data5);
 
         }
 
-        foreach ($contestants2 as $contestant2)
+        foreach ($contestants as $contestant)
         {
-            $compute6 =  Score::where('criteria_id',10)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+            $compute6 =  Score::where('criteria_id',20)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data6 = [
-                'contestant_id' => $contestant2->id,
+                'contestant_id' => $contestant->id,
                 'score'=>$compute6/$total_judge,
                 'event_id'=>$event_id,
                 'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>10
+                'sex_id'=>2,
+                'criteria_id'=>20
             ];
 
             Award::create($data6);
@@ -400,7 +400,7 @@ class ScoreController extends Controller
 
         foreach ($contestants as $contestant)
         {
-            $compute7 =  Score::where('criteria_id',11)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+            $compute7 =  Score::where('criteria_id',21)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data7 = [
                 'contestant_id' => $contestant->id,
@@ -408,24 +408,24 @@ class ScoreController extends Controller
                 'event_id'=>$event_id,
                 'round_id' => 1,
                 'sex_id'=>2,
-                'criteria_id'=>11
+                'criteria_id'=>21
             ];
 
             Award::create($data7);
 
         }
 
-        foreach ($contestants2 as $contestant2)
+        foreach ($contestants as $contestant)
         {
-            $compute8 =  Score::where('criteria_id',11)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+            $compute8 =  Score::where('criteria_id',22)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data8 = [
-                'contestant_id' => $contestant2->id,
+                'contestant_id' => $contestant->id,
                 'score'=>$compute8/$total_judge,
                 'event_id'=>$event_id,
                 'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>11
+                'sex_id'=>2,
+                'criteria_id'=>22
             ];
 
             Award::create($data8);
@@ -434,7 +434,7 @@ class ScoreController extends Controller
 
         foreach ($contestants as $contestant)
         {
-            $compute9 =  Score::where('criteria_id',12)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+            $compute9 =  Score::where('criteria_id',23)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
 
             $data9 = [
                 'contestant_id' => $contestant->id,
@@ -442,98 +442,98 @@ class ScoreController extends Controller
                 'event_id'=>$event_id,
                 'round_id' => 1,
                 'sex_id'=>2,
-                'criteria_id'=>12
+                'criteria_id'=>23
             ];
 
             Award::create($data9);
 
         }
 
-        foreach ($contestants2 as $contestant2)
-        {
-            $compute10 =  Score::where('criteria_id',12)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
-
-            $data10 = [
-                'contestant_id' => $contestant2->id,
-                'score'=>$compute10/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>12
-            ];
-
-            Award::create($data10);
-
-        }
-
-        foreach ($contestants as $contestant)
-        {
-            $compute11 =  Score::where('criteria_id',14)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
-
-            $data11 = [
-                'contestant_id' => $contestant->id,
-                'score'=>$compute11/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 1,
-                'sex_id'=>2,
-                'criteria_id'=>14
-            ];
-
-            Award::create($data11);
-
-        }
-
-        foreach ($contestants2 as $contestant2)
-        {
-            $compute12 =  Score::where('criteria_id',14)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
-
-            $data12 = [
-                'contestant_id' => $contestant2->id,
-                'score'=>$compute12/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>14
-            ];
-
-            Award::create($data12);
-
-        }
-
-
-        foreach ($contestants as $contestant)
-        {
-            $compute13 =  Score::where('criteria_id',13)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
-
-            $data13 = [
-                'contestant_id' => $contestant->id,
-                'score'=>$compute13/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 1,
-                'sex_id'=>2,
-                'criteria_id'=>13
-            ];
-
-            Award::create($data13);
-
-        }
-
-        foreach ($contestants2 as $contestant2)
-        {
-            $compute14  =  Score::where('criteria_id',13)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
-
-            $data14 = [
-                'contestant_id' => $contestant2->id,
-                'score'=>$compute14/$total_judge,
-                'event_id'=>$event_id,
-                'round_id' => 1,
-                'sex_id'=>1,
-                'criteria_id'=>13
-            ];
-
-            Award::create($data14);
-
-        }
+//        foreach ($contestants2 as $contestant2)
+//        {
+//            $compute10 =  Score::where('criteria_id',12)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+//
+//            $data10 = [
+//                'contestant_id' => $contestant2->id,
+//                'score'=>$compute10/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 1,
+//                'sex_id'=>1,
+//                'criteria_id'=>12
+//            ];
+//
+//            Award::create($data10);
+//
+//        }
+//
+//        foreach ($contestants as $contestant)
+//        {
+//            $compute11 =  Score::where('criteria_id',14)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+//
+//            $data11 = [
+//                'contestant_id' => $contestant->id,
+//                'score'=>$compute11/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 1,
+//                'sex_id'=>2,
+//                'criteria_id'=>14
+//            ];
+//
+//            Award::create($data11);
+//
+//        }
+//
+//        foreach ($contestants2 as $contestant2)
+//        {
+//            $compute12 =  Score::where('criteria_id',14)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+//
+//            $data12 = [
+//                'contestant_id' => $contestant2->id,
+//                'score'=>$compute12/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 1,
+//                'sex_id'=>1,
+//                'criteria_id'=>14
+//            ];
+//
+//            Award::create($data12);
+//
+//        }
+//
+//
+//        foreach ($contestants as $contestant)
+//        {
+//            $compute13 =  Score::where('criteria_id',13)->where('contestant_id',$contestant->id)->where('sex_id',2)->where('round_id',1)->sum('score');
+//
+//            $data13 = [
+//                'contestant_id' => $contestant->id,
+//                'score'=>$compute13/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 1,
+//                'sex_id'=>2,
+//                'criteria_id'=>13
+//            ];
+//
+//            Award::create($data13);
+//
+//        }
+//
+//        foreach ($contestants2 as $contestant2)
+//        {
+//            $compute14  =  Score::where('criteria_id',13)->where('contestant_id',$contestant2->id)->where('sex_id',1)->where('round_id',1)->sum('score');
+//
+//            $data14 = [
+//                'contestant_id' => $contestant2->id,
+//                'score'=>$compute14/$total_judge,
+//                'event_id'=>$event_id,
+//                'round_id' => 1,
+//                'sex_id'=>1,
+//                'criteria_id'=>13
+//            ];
+//
+//            Award::create($data14);
+//
+//        }
 
 
 
